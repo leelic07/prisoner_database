@@ -18,9 +18,7 @@
           </div>
         </div>
         <input type="button" class="login-btn col-xs-24" value="登录" id="loginBtn" @click="login"/>
-        <div class="registration col-xs-24">
-          <router-link class="pull-left col-xs-3 col-xs-offset-10" to="/registration">注册</router-link>
-        </div>
+
       </form>
     </div>
     <div class="footer col-xs-24">
