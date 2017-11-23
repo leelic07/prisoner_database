@@ -18,7 +18,6 @@
           </div>
         </div>
         <input type="button" class="login-btn col-xs-24" value="登录" id="loginBtn" @click="login"/>
-
       </form>
     </div>
     <div class="footer col-xs-24">
