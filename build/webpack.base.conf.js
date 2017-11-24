@@ -47,11 +47,11 @@ module.exports = {
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
       },
-      {
-        test: /\.css$/,
-        loader: 'css-loader!style-loader',
-        include: [resolve('src'), resolve('test')]
-      },
+      // {
+      //   test: /\.css$/,
+      //   loader: 'css-loader!style-loader',
+      //   include: [resolve('src'), resolve('test')]
+      // },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',

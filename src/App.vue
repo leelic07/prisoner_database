@@ -18,6 +18,6 @@ export default {
 }
 </script>
 
-<style>
+<style type="text/stylus" lang="stylus">
 
 </style>
