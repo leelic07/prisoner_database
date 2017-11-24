@@ -2,7 +2,9 @@
   <div id="" class="container-fluid">
     <NavHeader></NavHeader>
     <SideBar></SideBar>
-    <router-view/>
+    <!--<div id="router-view">-->
+      <router-view/>
+    <!--</div>-->
   </div>
 </template>
 
@@ -19,5 +21,6 @@ export default {
 </script>
 
 <style type="text/stylus" lang="stylus">
-
+  #router-view
+    margin-left:20%
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="punishment_change" class="col-xs-20">
+  <div id="punishment_change" class="col-xs-20 col-xs-offset-4">
     <!--路径导航组件-->
     <Bread :breadCrumb="breadCrumb"></Bread>
     <Container>
