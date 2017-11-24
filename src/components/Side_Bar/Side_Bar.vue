@@ -3,7 +3,7 @@
     <div class="side-top">
         <div class="side-avatar pull-left"></div>
         <div class="side-right">
-            <p class="">管理员</p>
+            <p class="side-content">管理员</p>
             <p class="glyphicon glyphicon-map-marker pull-left"></p>
             <p class="side-right-bottom">长沙监狱</p>    
         </div>
@@ -152,6 +152,8 @@
             .side-right
                 margin-left 52px
                 font-size 12px
+                .side-content
+                    margin-bottom 10px
                 .side-right-bottom
                     margin-left 17px
                     margin-bottom 0
