@@ -51,6 +51,7 @@
   #Header
     background-color:background
     color:white
+    height 46px
     padding:3px 0 0 0
     .header-left
       .logo
