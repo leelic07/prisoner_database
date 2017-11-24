@@ -19,17 +19,17 @@
         <div class="col-xs-2 header-information">
           <span class="information pull-left"></span>
         </div>
-        <div class="col-xs-13 header-user">
+        <div class="col-xs-12 header-user">
           <div class="user pull-left"></div>
           <p class="pull-left">管理员</p>
         </div>
+        <div class="header-divide pull-left"></div>
         <div class="col-xs-2 header-logout">
           <div class="logout pull-left"></div>
         </div>
       </div>
-
-
     </div>
+
   </div>
 </template>
 
@@ -44,13 +44,19 @@
 </script>
 
 <style type="text/stylus" lang="stylus" scoped>
-  background = #37474F
+  header-background = #37474F
   white = #fff
   /***/
     /*border:1px solid #000*/
   #Header
-    background-color:background
+    position:fixed
+    top:0
+    left:0
+    right:0
+    z-index:100
+    background-color:header-background
     color:white
+    height:46px
     padding:3px 0 0 0
     .header-left
       .logo
@@ -83,6 +89,7 @@
             &:hover
               cursor:pointer
         .header-user
+          /*border-right:1px solid #4C626D*/
           .user
             width: 30px
             height: 30px
@@ -96,12 +103,17 @@
             &:hover
               cursor:pointer
         .header-logout
+          margin-left:20px
           .logout
             width: 20px
             height:20px
             background:url(../../assets/img/logout.png) 0 0 no-repeat
             &:hover
               cursor:pointer
+        .header-divide
+          height: 30px
+          border-left:1px solid #4C626D
+          margin-top:-5px
       .align
         padding-top:11px
         font-size:17px
