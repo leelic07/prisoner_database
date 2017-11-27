@@ -1,5 +1,6 @@
 <template>
   <div id="Header" class="row">
+    <!--罪犯数据库logo-->
     <div class="col-xs-4 header-left">
       <div class="col-xs-24 logo">
         <span class="header-logo pull-left"></span>
@@ -28,21 +29,23 @@
           <div class="logout pull-left"></div>
         </div>
       </div>
+
     </div>
+
   </div>
 </template>
 
 <script>
 import { mapGetters,mapActions } from 'vuex'
     export default {
-        data() {
-            return {
+      data() {
+          return {
 
-            }
-        },
-        methods:mapActions([
-            'changeshow'
-        ])
+          }
+      },
+      methods:mapActions([
+          'changeshow'
+      ])
     }
 </script>
 
