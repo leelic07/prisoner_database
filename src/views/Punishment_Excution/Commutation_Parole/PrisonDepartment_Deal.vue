@@ -1,6 +1,6 @@
 <template>
   <!--路径导航组件-->
-  <div id="prisonDepartment_deal" class="col-xs-20">
+  <div id="prisonDepartment_deal" class="col-xs-20 col-xs-offset-4">
     <Bread :breadCrumb="breadCrumb"></Bread>
     <Container>
       <h1>监区办理</h1>

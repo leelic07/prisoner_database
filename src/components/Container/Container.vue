@@ -21,6 +21,7 @@
   white = #fff
   .router-container
     background:background-color
+
     .router-content
       background:white
       -webkit-border-radius: 5px
