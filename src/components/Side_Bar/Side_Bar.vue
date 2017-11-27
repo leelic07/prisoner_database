@@ -10,39 +10,39 @@
     </div>
     <ul class="col-xs-24">
         <!--一级菜单-->
-        <template v-for="(item ,index) in ListData">
-            <li class="list row" @click="toggle(index)" :key="index">
+        <template v-for="(item,index) in ListData">
+            <li class="list col-xs-24" @click="toggle(index)" :class="nowIndex==index?'active':''" :key="index">
                 <div class="col-xs-5">
                     <span class="li-icon"></span>
                 </div>
                 <div class="col-xs-14 col-xs-offset-1">
-                    <span>{{item.ListName}}</span>
+                    <span>{{item.ListName}}</span>  
                 </div>
                 <div class="col-xs-2 pull-right">   
-                    <span :class="isActive?'arrow-bottom':'arrow-right'"></span>
+                    <span :class="nowIndex==index?'arrow-bottom':'arrow-right'"></span>
                 </div>
             </li>
             <!--二级菜单-->
             <template v-if="item.secondaryMenu">
-                <ul v-show="isActive" :key="index">
-                    <li class="list-two row show" v-for="(tmp,ind) in item.secondaryMenu" :key="ind" @click="toggleTwo">
+                <ul v-show="nowIndex==index" :key="index" class="col-xs-24">
+                    <li class="list-two" v-for="(tmp,ind) in item.secondaryMenu" :key="ind" @click="toggleTwo(ind)">
                         <div class="col-xs-14 col-xs-offset-6">
                             <span>{{tmp.sedName}}</span>
                         </div>
-                        <div class="col-xs-2 pull-right">   
-                            <span :class="statusTwo?'arrow-bottom':'arrow-right'"></span>
+                        <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">   
+                            <span :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
                         </div>
-                    </li>
-                    <!--三级菜单-->
-                    <template v-if="item.secondaryMenu.thirdMenu">
-                        <ul v-show="statusTwo">
-                            <li class="list-three on row" v-for="(rmp,inde) in item.secondaryMenu.thirdMenu" :key="inde">
-                                <div class="col-xs-14 col-xs-offset-8">
-                                    <span>123</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </template>
+                        <!--三级菜单-->
+                        <template v-if="tmp.thirdMenu">
+                            <ul v-show="nowInd==ind" class="col-xs-24">
+                                <li class="list-three on row col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
+                                    <div class="col-xs-14 col-xs-offset-8">
+                                        <span>{{rmp.thrName}}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </template>
+                    </li>                             
                 </ul>
             </template>
         </template>
@@ -55,23 +55,29 @@
     export default {
         data() {
             return {
-                isActive:false,
+                ListData:ListData,
                 statusTwo:false,
-                ListData:ListData
+                nowIndex:-1,
+                nowInd:-1
             }
         },
         methods:{
             toggle(index){
-                this.isActive=!this.isActive
+                if(this.nowIndex==index){
+                    this.nowIndex=-1
+                }else{
+                    this.nowIndex=index
+                }     
             },
-            toggleTwo(){
-                this.statusTwo=!this.statusTwo
+            toggleTwo(ind){
+                if(this.nowInd==ind){
+                    this.nowInd=-1
+                }else{
+                    this.nowInd=ind
+                }     
             }
         },
         mounted:function(){
-            console.log(this.ListData,this.ListData[0].secondaryMenu[1].thirdMenu)
-            //let [{secondaryMenu:[{},{thirdMenu}]}]=this.ListData;
-            //  console.log(thirdMenu);
         }
     }
 </script>
