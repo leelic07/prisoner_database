@@ -3,9 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Validate from './assets/js/validate.js'
 import '@/assets/css/reset.css'
 
 Vue.config.productionTip = false
+
+//控件，参数验证
+Object.keys(Validate).forEach((key)=>{
+  Vue.prototype[key] = Validate[key];
+});
 
 /* eslint-disable no-new */
 new Vue({

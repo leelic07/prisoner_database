@@ -1,5 +1,6 @@
 <template>
   <div id="Header" class="row">
+    <!--罪犯数据库logo-->
     <div class="col-xs-4 header-left">
       <div class="col-xs-24 logo">
         <span class="header-logo pull-left"></span>
@@ -8,8 +9,9 @@
     </div>
 
     <div class="col-xs-20 header-right">
+
       <div class="col-xs-1 align">
-        <span class="glyphicon glyphicon-align-justify col-xs-12"></span>
+        <span class="glyphicon glyphicon-align-justify col-xs-12" @click="toggleSideBar()"></span>
       </div>
 
       <div class="col-xs-5 col-xs-offset-18">
@@ -28,17 +30,25 @@
           <div class="logout pull-left"></div>
         </div>
       </div>
+
     </div>
+
   </div>
 </template>
 
 <script>
     export default {
-        data() {
-            return {
+      data() {
+          return {
 
-            }
-        }
+          }
+      },
+      methods:{
+          //点击展开和收缩侧边栏执行的方法
+          toggleSideBar() {
+
+          }
+      }
     }
 </script>
 
