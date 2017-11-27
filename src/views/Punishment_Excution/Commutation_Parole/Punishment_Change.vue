@@ -29,5 +29,5 @@
   background-color = #F5F5F5
   white = #fff
   #punishment_change
-    margin-top:46px
+    /*margin-top:46px*/
 </style>
