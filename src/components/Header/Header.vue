@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-xs-20 header-right">
-      <div class="col-xs-1 align">
+      <div class="col-xs-1 align" @click="changeshow">
         <span class="glyphicon glyphicon-align-justify col-xs-12"></span>
       </div>
 
@@ -33,12 +33,16 @@
 </template>
 
 <script>
+import { mapGetters,mapActions } from 'vuex'
     export default {
         data() {
             return {
 
             }
-        }
+        },
+        methods:mapActions([
+            'changeshow'
+        ])
     }
 </script>
 
