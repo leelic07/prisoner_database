@@ -9,108 +9,69 @@
         </div>
     </div>
     <ul class="col-xs-24">
-        
-        <li class="list row" :class="isActive?'active':''" @click="toggle">
-            <div class="col-xs-5">
-                <span class="li-icon"></span>
-            </div>
-            <div class="col-xs-14 col-xs-offset-1">
-                <span>刑罚执行</span>
-            </div>
-            <div class="col-xs-2 pull-right">   
-                <span :class="isActive?'arrow-bottom':'arrow-right'"></span>
-            </div>
-        </li>
-            <!-- 刑罚执行下拉列表 -->
-            <ul v-show="status">
-                <li class="list-two row">
-                    <div class="col-xs-14 col-xs-offset-6">
-                        <span>收监管理</span>
-                    </div>
-                </li>
-                <li class="list-two row show" @click="toggleTwo">
-                    <div class="col-xs-14 col-xs-offset-6">
-                        <span>减刑假释</span>
-                    </div>
-                    <div class="col-xs-2 pull-right">   
-                        <span :class="statusTwo?'arrow-bottom':'arrow-right'"></span>
-                    </div>
-                </li>
-                    <!-- 减刑假释下拉列表 -->
-                    <ul v-show="statusTwo">
-                        <li class="list-three on row">
-                            <div class="col-xs-14 col-xs-offset-8">
-                                <span>刑罚变动</span>
-                            </div>
-                        </li>
-                        <li class="list-three row">
-                            <div class="col-xs-14 col-xs-offset-8">
-                                <span>监区办理</span>
-                            </div>
-                        </li>
-                        <li class="list-three row">
-                            <div class="col-xs-14 col-xs-offset-8">
-                                <span>其他处理</span>
-                            </div>
-                        </li>
-                    </ul>
-
-                <li class="list-two row">
-                    <div class="col-xs-14 col-xs-offset-6">
-                        <span>监外执行</span>
-                    </div>
-                </li>
-                <li class="list-two row">
-                    <div class="col-xs-14 col-xs-offset-6">
-                        <span>出监管理</span>
-                    </div>
-                </li>
-            </ul>
-
-        <li class="list row">
-            <div class="col-xs-5">
-                <span class="li-icon"></span>
-            </div>
-            <div class="col-xs-14 col-xs-offset-1">
-                <span>办公助理</span>
-            </div>
-            <div class="col-xs-2 pull-right">   
-                <span class="arrow-right"></span>
-            </div>
-        </li>
-        
-        <li class="list row">
-            <div class="col-xs-5">
-                <span class="li-icon"></span>
-            </div>
-            <div class="col-xs-14 col-xs-offset-1">
-                <span>档案管理</span>
-            </div>
-            <div class="col-xs-2 pull-right">   
-                <span class="arrow-right"></span>
-            </div>
-        </li>
+        <!--一级菜单-->
+        <template v-for="(item ,index) in ListData">
+            <li class="list row" @click="toggle(index)" :key="index">
+                <div class="col-xs-5">
+                    <span class="li-icon"></span>
+                </div>
+                <div class="col-xs-14 col-xs-offset-1">
+                    <span>{{item.ListName}}</span>
+                </div>
+                <div class="col-xs-2 pull-right">   
+                    <span :class="isActive?'arrow-bottom':'arrow-right'"></span>
+                </div>
+            </li>
+            <!--二级菜单-->
+            <template v-if="item.secondaryMenu">
+                <ul v-show="isActive" :key="index">
+                    <li class="list-two row show" v-for="(tmp,ind) in item.secondaryMenu" :key="ind" @click="toggleTwo">
+                        <div class="col-xs-14 col-xs-offset-6">
+                            <span>{{tmp.sedName}}</span>
+                        </div>
+                        <div class="col-xs-2 pull-right">   
+                            <span :class="statusTwo?'arrow-bottom':'arrow-right'"></span>
+                        </div>
+                    </li>
+                    <!--三级菜单-->
+                    <template v-if="item.secondaryMenu.thirdMenu">
+                        <ul v-show="statusTwo">
+                            <li class="list-three on row" v-for="(rmp,inde) in item.secondaryMenu.thirdMenu" :key="inde">
+                                <div class="col-xs-14 col-xs-offset-8">
+                                    <span>123</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </template>
+                </ul>
+            </template>
+        </template>
     </ul>
   </div>
 </template>
 
 <script>
+    import { ListData } from './../../assets/js/list'
     export default {
         data() {
             return {
-                status:false,
                 isActive:false,
-                statusTwo:false
+                statusTwo:false,
+                ListData:ListData
             }
         },
         methods:{
-            toggle(){
-                this.status=!this.status
+            toggle(index){
                 this.isActive=!this.isActive
             },
             toggleTwo(){
                 this.statusTwo=!this.statusTwo
             }
+        },
+        mounted:function(){
+            console.log(this.ListData,this.ListData[0].secondaryMenu[1].thirdMenu)
+            //let [{secondaryMenu:[{},{thirdMenu}]}]=this.ListData;
+            //  console.log(thirdMenu);
         }
     }
 </script>
