@@ -8,11 +8,11 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: '*',
-      component: Login
-    },
+    // {
+    //   path: '/',
+    //   name: '*',
+    //   component: Login
+    // },
     {
       path: '/login',
       name: 'Login',
@@ -27,6 +27,10 @@ export default new Router({
       path:'/prisonDepartment_deal',
       name:'PrisonDepartment_Deal',
       component:PrisonDepartment_Deal
+    },
+    {
+      path:'*',
+      redirect:'/login'
     }
   ]
 })

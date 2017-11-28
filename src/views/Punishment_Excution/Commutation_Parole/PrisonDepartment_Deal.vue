@@ -14,9 +14,9 @@
 
   export default {
     data() {
-        return {
-            breadCrumb:['刑罚执行','减刑假释','监区办理']
-        }
+      return {
+          breadCrumb:['刑罚执行','减刑假释','监区办理']
+      }
     },
     components:{
       Bread,
