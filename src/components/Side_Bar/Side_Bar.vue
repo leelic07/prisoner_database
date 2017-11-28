@@ -207,7 +207,7 @@
             height 38px
             line-height 38px
             font-size 12px
-            color #fff
+            color white
             background #182125
             &:hover
                 background-color #13191c
@@ -254,7 +254,7 @@
                 background #29B0A3
                 line-height 40px 
                 font-size 12px
-                color #fff
+                color white
                 >span
                     margin-left 18px
             .list-second
@@ -263,19 +263,18 @@
                 line-height 40px
                 color #fff
                 font-size 12px
-                color #fff
+                color white
                 .arrow
                     display inline-block
-                    margin-left 139px
+                    margin-left 148px
                 >span
                     margin-left 18px
             .list-third
                 background #1E282D
                 height 40px
                 line-height 40px
-                color #fff
+                color white
                 font-size 12px
-                color #fff
                 >span
                     margin-left 30px
                 &:hover
