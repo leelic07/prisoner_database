@@ -42,7 +42,6 @@
       -moz-border-radius: 5px
       border-radius: 3px
       width:97%
-      height:500px
       margin-left:1.5%
       margin-top:20px
       margin-bottom:20px
