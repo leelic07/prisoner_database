@@ -14,14 +14,14 @@
 </template>
 
 <script>
-    export default {
-        props:['breadCrumb'],
-        data() {
-            return {
+  export default {
+    props:['breadCrumb'],
+    data() {
+      return {
 
-            }
-        }
+      }
     }
+  }
 </script>
 
 <style type="text/stylus" lang="stylus" scoped>
@@ -50,7 +50,7 @@
           margin-right:10px
         &:first-child
           span
-            line-height:38px
+            line-height:36px
           a
             color:bread-color
 </style>

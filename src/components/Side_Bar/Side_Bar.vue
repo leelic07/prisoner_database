@@ -1,11 +1,11 @@
 <template>
-  <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'50px'}">
+  <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'3.7%'}">
     <div class="side-top">
         <div class="side-avatar pull-left"></div>
         <div class="side-right" :style="{ display : isShow?'':'none'}">
             <p class="side-content">管理员</p>
             <p class="glyphicon glyphicon-map-marker pull-left"></p>
-            <p class="side-right-bottom">长沙监狱</p>    
+            <p class="side-right-bottom">长沙监狱</p>
         </div>
     </div>
     <ul class="col-xs-24">
@@ -16,9 +16,9 @@
                     <span class="li-icon"></span>
                 </div>
                 <div class="col-xs-8 col-xs-offset-1" :style="{ display : isShow?'':'none'}">
-                    <span>{{item.ListName}}</span>  
+                    <span>{{item.ListName}}</span>
                 </div>
-                <div class="col-xs-2 pull-right" :style="{ display : isShow?'':'none'}">   
+                <div class="col-xs-2 pull-right" :style="{ display : isShow?'':'none'}">
                     <span :class="nowIndex==index?'arrow-bottom':'arrow-right'"></span>
                 </div>
             </li>
@@ -29,7 +29,7 @@
                         <div class="col-xs-14 col-xs-offset-6">
                             <span>{{tmp.sedName}}</span>
                         </div>
-                        <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">   
+                        <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">
                             <span :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
                         </div>
                         <!--三级菜单-->
@@ -42,7 +42,7 @@
                                 </li>
                             </ul>
                         </template>
-                    </li>                             
+                    </li>
                 </ul>
             </template>
         </template>
@@ -69,7 +69,7 @@
                     this.nowIndex=-1
                 }else{
                     this.nowIndex=index
-                }     
+                }
             },
             //二级菜单点击缩放方法
             toggleTwo(ind){
@@ -77,7 +77,7 @@
                     this.nowInd=-1
                 }else{
                     this.nowInd=ind
-                }     
+                }
             }
         },
          computed:mapGetters([
@@ -92,7 +92,7 @@
 <style type="text/stylus" lang="stylus" scoped>
     bgcolor = #263238
     white = #fff
-    ul 
+    ul
         padding 0
         margin 0
         list-style none
@@ -107,7 +107,7 @@
         display inline-block
         width 8px
         height 5px
-        background url(../../assets/img/arrow-bottom.png) 0 0 no-repeat  
+        background url(../../assets/img/arrow-bottom.png) 0 0 no-repeat
     #side-bar
         background bgcolor
         position absolute
@@ -115,7 +115,7 @@
         bottom 0px
         color white
         overflow-y:auto;
-        transition: all .2s linear;
+        transition: all .3s linear;
         .side-top
             padding 20px 16px 20px 7px
             position relative
@@ -137,7 +137,7 @@
             line-height 44px
             font-size 14px
             .list-icon
-                margin-top 1px  
+                margin-top 1px
                 &:hover
                     background-color #29b0a3
                 .li-icon
@@ -150,7 +150,7 @@
         .list-two
             height 38px
             line-height 38px
-            font-size 14px 
+            font-size 14px
             color #d1d1d1
             background-color #202a2f
         .list-three
