@@ -1,7 +1,7 @@
 <template>
   <!--容器组件-->
   <Container>
-    <!--路径导航组件-->
+    <!--面包屑组件-->
     <Bread :breadCrumb="breadCrumb" slot="breadCrumb"></Bread>
     <div id="prisonDepartment_deal" class="col-xs-24" slot="content">
       <h1>监区办理</h1>

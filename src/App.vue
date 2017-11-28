@@ -11,6 +11,7 @@
 <script>
 import SideBar from '@/components/Side_Bar/Side_Bar'
 import NavHeader from '@/components/Header/Header'
+
 export default {
   name: 'app',
   data() {

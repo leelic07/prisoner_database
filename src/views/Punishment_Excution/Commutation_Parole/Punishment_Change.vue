@@ -1,7 +1,7 @@
 <template>
   <!--容器组件-->
   <Container>
-    <!--路径导航组件-->
+    <!--面包屑组件-->
     <Bread :breadCrumb="breadCrumb" slot="breadCrumb"></Bread>
     <div id="punishment_change" class="col-xs-24" slot="content">
       <h1>刑罚变动</h1>

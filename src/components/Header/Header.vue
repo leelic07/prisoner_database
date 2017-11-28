@@ -1,4 +1,5 @@
 <template>
+
   <div id="Header" class="row">
     <!--罪犯数据库logo-->
     <div class="col-xs-4 header-left">
@@ -23,30 +24,36 @@
         <div class="col-xs-12 header-user">
           <div class="user pull-left"></div>
           <p class="pull-left">管理员</p>
+          <div class="modification">
+            <router-link to="/user_modification" class="pull-left">
+              <span class=""></span>
+              修改个人信息
+            </router-link>
+          </div>
         </div>
         <div class="header-divide pull-left"></div>
         <div class="col-xs-2 header-logout">
           <div class="logout pull-left"></div>
         </div>
       </div>
-
     </div>
-
   </div>
+
 </template>
 
 <script>
-import { mapGetters,mapActions } from 'vuex'
-    export default {
-      data() {
-          return {
+  import { mapGetters,mapActions } from 'vuex'
 
-          }
-      },
-      methods:mapActions([
-          'changeshow'
-      ])
-    }
+  export default {
+    data() {
+        return {
+
+        }
+    },
+    methods:mapActions([
+        'changeshow'
+    ])
+  }
 </script>
 
 <style type="text/stylus" lang="stylus" scoped>
@@ -95,19 +102,32 @@ import { mapGetters,mapActions } from 'vuex'
             &:hover
               cursor:pointer
         .header-user
-          /*border-right:1px solid #4C626D*/
+          position:relative
           .user
             width: 30px
             height: 30px
             border-radius:50%
             background:url(../../assets/img/user.png) 0 0 no-repeat
             margin:-5px 0 0 20px
-            &:hover
-              cursor:pointer
           p
             margin-left:7px
-            &:hover
-              cursor:pointer
+          &:hover
+            cursor:pointer
+          .modification
+            position:absolute
+            z-index:100
+            bottom:-35px
+            left:20px
+            height:50px
+            a
+              color:#3D3D3D
+              font-size:15px
+              height:30px
+              width:120px
+              line-height:30px
+              background:#F5F5F5
+              text-align:center
+              /*padding:0 5px*/
         .header-logout
           margin-left:20px
           .logout

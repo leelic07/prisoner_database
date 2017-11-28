@@ -1,4 +1,5 @@
 <template>
+  <!--面包屑组件-->
   <div id="bread" class="row">
     <ul class="bread-crumb col-xs-24">
       <li class="pull-left">
