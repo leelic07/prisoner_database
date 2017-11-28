@@ -9,9 +9,8 @@
     </div>
 
     <div class="col-xs-20 header-right">
-
-      <div class="col-xs-1 align">
-        <span class="glyphicon glyphicon-align-justify col-xs-12" @click="toggleSideBar()"></span>
+      <div class="col-xs-1 align" @click="changeshow">
+        <span class="glyphicon glyphicon-align-justify col-xs-12"></span>
       </div>
 
       <div class="col-xs-5 col-xs-offset-18">
@@ -37,18 +36,16 @@
 </template>
 
 <script>
+import { mapGetters,mapActions } from 'vuex'
     export default {
       data() {
           return {
 
           }
       },
-      methods:{
-          //点击展开和收缩侧边栏执行的方法
-          toggleSideBar() {
-
-          }
-      }
+      methods:mapActions([
+          'changeshow'
+      ])
     }
 </script>
 

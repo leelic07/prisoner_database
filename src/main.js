@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import Validate from './assets/js/validate.js'
 import '@/assets/css/reset.css'
+import store from './store'
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,7 @@ Object.keys(Validate).forEach((key)=>{
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

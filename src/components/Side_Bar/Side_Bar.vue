@@ -1,8 +1,8 @@
 <template>
-  <div id="side-bar" class="col-xs-4 pull-left">
+  <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'50px'}">
     <div class="side-top">
         <div class="side-avatar pull-left"></div>
-        <div class="side-right">
+        <div class="side-right" :style="{ display : isShow?'':'none'}">
             <p class="side-content">管理员</p>
             <p class="glyphicon glyphicon-map-marker pull-left"></p>
             <p class="side-right-bottom">长沙监狱</p>    
@@ -12,13 +12,13 @@
         <!--一级菜单-->
         <template v-for="(item,index) in ListData">
             <li class="list col-xs-24" @click="toggle(index)" :class="nowIndex==index?'active':''" :key="index">
-                <div class="col-xs-5">
+                <div class="col-xs-4 list-icon">
                     <span class="li-icon"></span>
                 </div>
-                <div class="col-xs-14 col-xs-offset-1">
+                <div class="col-xs-8 col-xs-offset-1" :style="{ display : isShow?'':'none'}">
                     <span>{{item.ListName}}</span>  
                 </div>
-                <div class="col-xs-2 pull-right">   
+                <div class="col-xs-2 pull-right" :style="{ display : isShow?'':'none'}">   
                     <span :class="nowIndex==index?'arrow-bottom':'arrow-right'"></span>
                 </div>
             </li>
@@ -52,16 +52,18 @@
 
 <script>
     import { ListData } from './../../assets/js/list'
+    import { mapGetters } from 'vuex'
     export default {
         data() {
             return {
                 ListData:ListData,
                 statusTwo:false,
-                nowIndex:-1,
-                nowInd:-1
+                nowIndex:-1,//一级菜单判断条件
+                nowInd:-1,//二级菜单判断条件
             }
         },
         methods:{
+            //一级菜单点击缩放方法
             toggle(index){
                 if(this.nowIndex==index){
                     this.nowIndex=-1
@@ -69,6 +71,7 @@
                     this.nowIndex=index
                 }     
             },
+            //二级菜单点击缩放方法
             toggleTwo(ind){
                 if(this.nowInd==ind){
                     this.nowInd=-1
@@ -77,7 +80,11 @@
                 }     
             }
         },
+         computed:mapGetters([
+            'isShow'
+        ]),
         mounted:function(){
+            console.log(this.isShow)
         }
     }
 </script>
@@ -108,6 +115,7 @@
         bottom 0px
         color white
         overflow-y:auto;
+        transition: all .2s linear;
         .side-top
             padding 20px 16px 20px 7px
             position relative
@@ -128,15 +136,17 @@
             height 44px
             line-height 44px
             font-size 14px
-            &:hover
-                background-color #29b0a3
-            .li-icon
-                display:inline-block
-                width 15px
-                height 15px
-                background url(../../assets/img/settings.png) 0 0 no-repeat
-                margin-left 16px
-                margin-right 14px
+            .list-icon
+                margin-top 1px  
+                &:hover
+                    background-color #29b0a3
+                .li-icon
+                    display:inline-block
+                    width 15px
+                    height 15px
+                    background url(../../assets/img/settings.png) 0 0 no-repeat
+                    margin-left 16px
+                    margin-right 14px
         .list-two
             height 38px
             line-height 38px
