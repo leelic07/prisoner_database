@@ -124,7 +124,7 @@
 <style type="text/stylus" lang="stylus" scoped>
     bgcolor = #263238
     white = #fff
-    ul 
+    ul
         padding 0
         margin 0
         list-style none
@@ -139,15 +139,15 @@
         display inline-block
         width 8px
         height 5px
-        background url(../../assets/img/arrow-bottom.png) 0 0 no-repeat  
+        background url(../../assets/img/arrow-bottom.png) 0 0 no-repeat
     #side-bar
         background bgcolor
         position absolute
         top 46px
         bottom 0px
         color white
-        overflow-y auto
-        transition all .2s linear
+        overflow-y:auto;
+        transition: all .3s linear;
         .side-top
             padding 20px 16px 14px 9px
             width 260px
@@ -184,7 +184,7 @@
         .list-two
             height 38px
             line-height 38px
-            font-size 14px 
+            font-size 14px
             color #d1d1d1
             background-color #202a2f
         .list-three
@@ -201,7 +201,8 @@
         top 46px
         bottom 0px
         color white
-        transition all .2s linear
+        z-index 999
+        transition all .3s linear
         .side-top
             padding 20px 16px 14px 9px
             width 260px

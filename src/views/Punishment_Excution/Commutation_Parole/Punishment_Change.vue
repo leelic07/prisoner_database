@@ -1,11 +1,12 @@
 <template>
-  <div id="punishment_change" class="col-xs-20 col-xs-offset-4">
+  <!--容器组件-->
+  <Container>
     <!--路径导航组件-->
-    <Bread :breadCrumb="breadCrumb"></Bread>
-    <Container>
+    <Bread :breadCrumb="breadCrumb" slot="breadCrumb"></Bread>
+    <div id="punishment_change" class="col-xs-24" slot="content">
       <h1>刑罚变动</h1>
-    </Container>
-  </div>
+    </div>
+  </Container>
 </template>
 
 <script>
@@ -28,6 +29,4 @@
 <style type="text/stylus" lang="stylus">
   background-color = #F5F5F5
   white = #fff
-  #punishment_change
-    /*margin-top:46px*/
 </style>

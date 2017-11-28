@@ -1,11 +1,12 @@
 <template>
-  <!--路径导航组件-->
-  <div id="prisonDepartment_deal" class="col-xs-20 col-xs-offset-4">
-    <Bread :breadCrumb="breadCrumb"></Bread>
-    <Container>
+  <!--容器组件-->
+  <Container>
+    <!--路径导航组件-->
+    <Bread :breadCrumb="breadCrumb" slot="breadCrumb"></Bread>
+    <div id="prisonDepartment_deal" class="col-xs-24" slot="content">
       <h1>监区办理</h1>
-    </Container>
-  </div>
+    </div>
+  </Container>
 </template>
 
 <script>
@@ -14,9 +15,9 @@
 
   export default {
     data() {
-        return {
-            breadCrumb:['刑罚执行','减刑假释','监区办理']
-        }
+      return {
+          breadCrumb:['刑罚执行','减刑假释','监区办理']
+      }
     },
     components:{
       Bread,

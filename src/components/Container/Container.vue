@@ -1,18 +1,28 @@
 <template>
-  <div class="col-xs-24 router-container">
-    <div class="router-content">
-      <slot></slot>
+  <div class="col-xs-20 col-xs-offset-4 router-container" :class="{toggleSize : isShow?false:true}">
+    <slot name="breadCrumb"></slot>
+    <div class="router-content col-xs-24">
+      <slot name="content"></slot>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
     export default {
-        data() {
-            return {
-
-            }
+      data() {
+        return {
+          toggleSize:false
         }
+      },
+      computed:mapGetters([
+        'isShow'
+      ]),
+      watch:{
+        isShow(){
+            console.log(this.isShow);
+        }
+      }
     }
 </script>
 
@@ -21,7 +31,11 @@
   white = #fff
   .router-container
     background:background-color
-
+    transition:all .3s linear
+    &.toggleSize
+      transition:margin-left .3s linear
+      width:96.5%
+      margin-left:3.7%
     .router-content
       background:white
       -webkit-border-radius: 5px

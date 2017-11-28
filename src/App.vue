@@ -21,8 +21,7 @@ export default {
   watch:{
     //路由改变时是否隐藏和显示侧边栏和页头
     $route(to,from){
-      console.log(to.path,from.path);
-      if(to.path == '/login' || from.path == '/login') {
+      if(to.path == '/login') {
           this.isLoginPage = false
       }else {
           this.isLoginPage = true
