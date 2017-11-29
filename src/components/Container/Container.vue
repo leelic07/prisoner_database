@@ -51,11 +51,11 @@
       width:96.3%
       margin-left:3.7%
     .router-content
-      background:white
+      background:background-color
       border-radius(2px)
       width:97%
       margin-left:1.5%
       margin-top:20px
       margin-bottom:20px
-      border:1px solid #E3E3E3
+      /*border:1px solid #E3E3E3*/
 </style>
