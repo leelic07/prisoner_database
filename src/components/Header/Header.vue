@@ -21,9 +21,9 @@
         <div class="col-xs-2 header-information">
           <span class="information pull-left"></span>
         </div>
-        <div class="col-xs-12 header-user" @click="toggleModification = !toggleModification">
-          <div class="user pull-left"></div>
-          <p class="pull-left">管理员</p>
+        <div class="col-xs-12 header-user is-header-user" @click="toggleModification = !toggleModification">
+          <div class="user pull-left is-header-user"></div>
+          <p class="pull-left is-header-user">管理员</p>
           <div class="modification" v-if="toggleModification">
             <router-link to="/user_modification" class="pull-left">
               <span class="pull-left"></span>
@@ -51,7 +51,23 @@
       }
     },
     methods:{
-      mapActions(['changeshow']),
+      changeshow(){
+         this.$store.dispatch('changeshow')
+      },
+      //点击其他位置时让修改个人信息弹框消失
+      blurHeaderUser(){
+        document.onclick = e => {
+          e.stopPropagation();
+          if(!$(e.target).hasClass('is-header-user')){
+            if(this.toggleModification) {
+              this.toggleModification = false;
+            }
+          }
+        }
+      }
+    },
+    mounted(){
+        this.blurHeaderUser();
     }
   }
 </script>

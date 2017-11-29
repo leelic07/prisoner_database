@@ -10,21 +10,22 @@
 
 <script>
   import { mapGetters } from 'vuex'
-    export default {
-      data() {
-        return {
 
-        }
-      },
-      computed:mapGetters([
-        'isShow'
-      ]),
-      watch:{
-        isShow(){
-            console.log(this.isShow);
-        }
+  export default {
+    data() {
+      return {
+
+      }
+    },
+    computed:mapGetters([
+      'isShow'
+    ]),
+    watch:{
+      isShow(){
+
       }
     }
+  }
 </script>
 
 <style type="text/stylus" lang="stylus">
@@ -37,6 +38,11 @@
     -o-transition prop time mode
     transition prop time mode
 
+  border-radius(radius)//边框的弯曲像素
+    -webkit-border-radius radius
+    -moz-border-radius radius
+    border-radius radius
+
   .router-container
     background:background-color
     transition(all,.3s,linear)
@@ -46,9 +52,7 @@
       margin-left:3.7%
     .router-content
       background:white
-      -webkit-border-radius: 5px
-      -moz-border-radius: 5px
-      border-radius: 3px
+      border-radius(2px)
       width:97%
       margin-left:1.5%
       margin-top:20px
