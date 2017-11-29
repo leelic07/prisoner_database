@@ -3,7 +3,7 @@
         <!-- 展开侧边栏 -->
         <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'3.6%'}">
             <div class="side-top row">
-                <div class="side-avatar pull-left"></div>
+                <div class="side-avatar col-xs-2 col-xs-offset-1 pull-left"></div>
                 <div class="side-right" :style="{ display : isShow?'':'none'}">
                     <p class="side-content col-xs-24">管理员</p>
                     <p class="glyphicon glyphicon-map-marker col-xs-1 pull-left"></p>
@@ -17,7 +17,7 @@
                         <div class="col-xs-4 list-icon">
                             <span class="li-icon"></span>
                         </div>
-                        <div class="col-xs-8 col-xs-offset-1" :style="{ display : isShow?'':'none'}">
+                        <div class="col-xs-16 col-xs-offset-1" :style="{ display : isShow?'':'none'}">
                             <span>{{item.ListName}}</span>  
                         </div>
                         <div class="col-xs-2 pull-right">   
@@ -62,7 +62,7 @@
             <ul class="col-xs-24">
                 <template v-for="(item,index) in ListData">
                     <li class="list col-xs-24" :key="index" @click="toggle(index)" :class="nowIndex==index?'on':''">
-                        <div class="list-icon">
+                        <div class="list-icon col-xs-24">
                             <span class="li-icon"></span>
                         </div>
                     </li>
@@ -183,7 +183,7 @@
                 background:url(../../assets/img/user.png) 0 0 no-repeat
                 background-size 38px 40px
             .side-right
-                margin-left 52px
+                margin-left 61px
                 font-size 12px
                 .side-content
                     margin-bottom 10px

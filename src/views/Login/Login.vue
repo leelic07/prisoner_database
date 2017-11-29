@@ -7,11 +7,11 @@
       <!--登录输入框-->
       <div class="login-input col-xs-20 col-xs-offset-2">
         <div class="col-xs-24">
-          <input type="text" class="form-control" placeholder="请输入用户名">
+          <input type="text" class="form-control" placeholder="请输入用户名" v-model="userName">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="col-xs-24">
-          <input type="password" class="form-control" placeholder="请输入密码">
+          <input type="password" class="form-control" placeholder="请输入密码" v-model="password">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
       </div>
@@ -35,9 +35,16 @@
 </template>
 
 <script>
+
   export default {
     data() {
-      return {}
+      return {
+        userName:'',
+        password:'',
+        access_token:'',
+        refresh_token:'',
+
+      }
     },
     methods: {
       //点击登录按钮时执行的方法
@@ -52,10 +59,56 @@
             this.login();
           }
         }
+      },
+
+      //获取accesstoken的方法
+      getAccessToken(){
+        var params = new URLSearchParams();
+        params.append('grant_type','password');
+        params.append('username',this.userName);
+        params.append('password',this.password);
+
+        this.axios({
+          method:'post',
+          url:'cid/oauth/token',
+          data:params,
+          headers:{
+            'Content-Type':'application/x-www-form-urlencoded'
+          },
+          config:{
+            auth:{
+              username:'cid',
+              password:'25d5e2e9b0ed47bbb9d4b82f4abc8c09'
+            }
+          }
+        }).then(res => {
+            console.log('结果：' + res);
+            this.access_token = res.access_token;
+            this.refresh_token = res.resfresh_token;
+        }).catch(err => {
+            console.log('错误：' + err);
+        })
+
+//        this.axios.post('cid/oauth/token', {
+//          params:{
+//            grant_type: 'password',
+//            username: this.userName,
+//            password: this.password
+//          }
+//        }, {
+//          headers:{
+//            'Content-Type':'application/x-www-form-urlencoded'
+//          }
+//        }).then(res => {
+//          console.log(res);
+//        }).catch(err => {
+//          console.log(err);
+//        })
       }
     },
     mounted() {
         this.keyUpEnter();
+        this.getAccessToken();
     }
   }
 </script>
