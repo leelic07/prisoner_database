@@ -11,11 +11,11 @@
                         <input type="password" :value="oldPassword" class="form-control" placeholder="原始密码">
                     </div>
                     <div class="form-input-middle">
-                        <input :type="inputTypeOld" :value="newPassword" class="form-control" placeholder="输入新密码">
+                        <input :type="inputTypeOld" v-model="newPassword" class="form-control" placeholder="输入新密码">
                         <span class="glyphicon" :class="stateOld?'glyphicon-eye-close':'glyphicon-eye-open'" @click="isHiddenOld"></span>
                     </div>
                     <div class="form-input-bottom">
-                        <input :type="inputTypeNew" :value="newPassword_again" class="form-control" placeholder="再次输入新密码">
+                        <input :type="inputTypeNew" v-model="newPassword_again" class="form-control" placeholder="再次输入新密码">
                         <span class="glyphicon" :class="stateNew?'glyphicon-eye-close':'glyphicon-eye-open'"  @click="isHiddenNew"></span>
                     </div>
                     <div class="form-btn">
