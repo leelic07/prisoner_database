@@ -43,9 +43,11 @@ import { mapGetters,mapActions } from 'vuex'
 
           }
       },
-      methods:mapActions([
-          'changeshow'
-      ])
+      methods:{
+        changeshow(){
+           this.$store.dispatch('changeshow')
+        }
+      }
     }
 </script>
 

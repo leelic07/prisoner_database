@@ -68,21 +68,31 @@
                     </li>
 
                     <ul class="list-col-ul col-xs-24" :key="index">
-                        <li class="list-first" @click="toggle(index)" :style="{ display : nowIndex==index?'':'none'}" :key="index">
-                            <span>{{item.ListName}}</span>    
+                        <li class="list-first" @click="toggle(index)" :style="{ display : nowIndex==index?'block':'none'}" :key="index">
+                            <div class="col-xs-8 col-xs-offset-3">
+                                <span>{{item.ListName}}</span>
+                            </div>      
                         </li>
                         <template v-if="item.secondaryMenu">
-                            <ul v-show="nowIndex==index" :key="index" class="col-xs-24">
-                                <li class="list-second"  v-for="(tmp,ind) in item.secondaryMenu" :key="ind" @click="toggleTwo(ind)">
-                                    <span>{{tmp.sedName}}</span>
-                                    <span v-if="tmp.thirdMenu" class="arrow" :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
+                            <ul class="col-xs-24" v-show="nowIndex==index" :key="index">
+                                <li class="list-second" v-for="(tmp,ind) in item.secondaryMenu" :key="ind">
+                                    <div @click="toggleTwo(ind)" class="col-xs-24">
+                                        <div class="col-xs-18 col-xs-offset-3">
+                                            <span>{{tmp.sedName}}</span>
+                                        </div>
+                                        <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">
+                                            <span :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
+                                        </div>
+                                    </div>                                    
                                     <template v-if="tmp.thirdMenu">
                                         <ul v-show="nowInd==ind" class="col-xs-24">
-                                            <li class="list-third row col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
-                                                <span>{{rmp.thrName}}</span>
+                                            <li class="list-third col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
+                                                <div class="col-xs-14 col-xs-offset-5">
+                                                    <span>{{rmp.thrName}}</span>
+                                                </div>                                               
                                             </li>
                                         </ul>
-                                    </template>
+                                    </template>                       
                                 </li>
                             </ul>
                         </template>
@@ -90,7 +100,6 @@
                 </template>
             </ul>
         </div>
-
     </div>
 </template>  
 
@@ -255,8 +264,6 @@
                 line-height 40px 
                 font-size 12px
                 color white
-                >span
-                    margin-left 18px
             .list-second
                 background #222d32
                 height 40px
@@ -264,19 +271,12 @@
                 color #fff
                 font-size 12px
                 color white
-                .arrow
-                    display inline-block
-                    margin-left 148px
-                >span
-                    margin-left 18px
             .list-third
                 background #1E282D
                 height 40px
                 line-height 40px
                 color white
                 font-size 12px
-                >span
-                    margin-left 30px
                 &:hover
                     background #1A2226
 </style>
