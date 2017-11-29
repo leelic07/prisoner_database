@@ -5,6 +5,9 @@
     <div class="router-content col-xs-24">
       <slot name="content"></slot>
     </div>
+    <div class="container-bottom">
+      <span>Copyright &copy; 2006-2017 罪犯数据库</span>
+    </div>
   </div>
 </template>
 
@@ -57,5 +60,11 @@
       margin-left:1.5%
       margin-top:20px
       margin-bottom:20px
-      border:1px solid #E3E3E3
+      border:1px solid #e3e3e3
+    .container-bottom
+      margin-left 1.5%
+      margin-bottom 12px
+      span
+        font-size 12px
+        color #A3A6AB
 </style>

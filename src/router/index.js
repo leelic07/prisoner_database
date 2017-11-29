@@ -4,6 +4,7 @@ import Punishment_Change from '@/views/Punishment_Excution/Commutation_Parole/Pu
 import PrisonDepartment_Deal from '@/views/Punishment_Excution/Commutation_Parole/PrisonDepartment_Deal'
 import Login from '@/views/Login/Login'
 import User_Modification from '@/views/User_Modification/User_Modification'
+import Password_Modification from '@/views/Password_Modification.vue/Password_modification'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path:'/user_modification',
       name:'User_Modification',
       component:User_Modification
+    },
+    {
+      path:'/pwd_modification',
+      name:'Password_Modification',
+      component:Password_Modification
     },
     {
       path:'*',
