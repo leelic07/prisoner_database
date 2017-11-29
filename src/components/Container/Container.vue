@@ -60,7 +60,6 @@
       margin-left:1.5%
       margin-top:20px
       margin-bottom:20px
-      border:1px solid #e3e3e3
     .container-bottom
       margin-left 1.5%
       margin-bottom 12px
