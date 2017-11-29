@@ -21,12 +21,12 @@
         <div class="col-xs-2 header-information">
           <span class="information pull-left"></span>
         </div>
-        <div class="col-xs-12 header-user">
+        <div class="col-xs-12 header-user" @click="toggleModification = !toggleModification">
           <div class="user pull-left"></div>
           <p class="pull-left">管理员</p>
-          <div class="modification">
+          <div class="modification" v-if="toggleModification">
             <router-link to="/user_modification" class="pull-left">
-              <span class=""></span>
+              <span class="pull-left"></span>
               修改个人信息
             </router-link>
           </div>
@@ -46,13 +46,13 @@
 
   export default {
     data() {
-        return {
-
-        }
+      return {
+        toggleModification:false
+      }
     },
-    methods:mapActions([
-        'changeshow'
-    ])
+    methods:{
+      mapActions(['changeshow']),
+    }
   }
 </script>
 
@@ -117,17 +117,26 @@
             position:absolute
             z-index:100
             bottom:-35px
-            left:20px
-            height:50px
+            left:-15px
+            height:40px
+            background:white
+            border:1px solid #E1E1E1
+            padding:4px 0 0 0
             a
               color:#3D3D3D
               font-size:15px
               height:30px
-              width:120px
+              width:130px
               line-height:30px
               background:#F5F5F5
-              text-align:center
-              /*padding:0 5px*/
+              text-align:left
+              &:hover
+                background:#E1E1E1
+              span
+                width: 16px
+                height:14px
+                margin:8px 5px 0 8px
+                background:url(../../assets/img/user-modification.png) 0 0 no-repeat
         .header-logout
           margin-left:20px
           .logout

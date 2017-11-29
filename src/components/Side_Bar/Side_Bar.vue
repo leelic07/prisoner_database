@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- 展开侧边栏 -->
         <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'0'}">
             <div class="side-top row">
                 <div class="side-avatar pull-left"></div>
@@ -39,7 +40,7 @@
                                 <!--三级菜单-->
                                 <template v-if="tmp.thirdMenu">
                                     <ul v-show="nowInd==ind" class="col-xs-24">
-                                        <li class="list-three on row col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
+                                        <li class="list-three row col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
                                             <div class="col-xs-14 col-xs-offset-8">
                                                 <span>{{rmp.thrName}}</span>
                                             </div>
@@ -53,30 +54,43 @@
             </ul>
         </div>
 
+        <!-- 折叠侧边栏 -->
         <div v-show="!isShow" id="side-collapse" class="col-xs-4 pull-left" :style="{ width : isShow?'':'3.7%'}">
             <div class="side-top row">
                 <div class="side-avatar pull-left"></div>
             </div>
-            <ul class="col-xs-24">
-                <!--一级菜单-->
-                    <li class="list col-xs-24">
+            <ul class="col-xs-24 row">
+                <template v-for="(item,index) in ListData">
+                    <li class="list col-xs-24" :key="index" @click="toggle(index)" :class="nowIndex==index?'on':''">
                         <div class="list-icon">
                             <span class="li-icon"></span>
                         </div>
                     </li>
-                    <ul class="list-col-ul">
-                        <li class="list-third">
-                            <span>123</span>    
+
+                    <ul class="list-col-ul col-xs-24" :key="index">
+                        <li class="list-first" @click="toggle(index)" :style="{ display : nowIndex==index?'':'none'}" :key="index">
+                            <span>{{item.ListName}}</span>    
                         </li>
-                        <li class="list-third">
-                            <span>123</span>  
-                        </li>
-                        <li class="list-third">
-                            <span>123</span>  
-                        </li>
+                        <template v-if="item.secondaryMenu">
+                            <ul v-show="nowIndex==index" :key="index" class="col-xs-24">
+                                <li class="list-second"  v-for="(tmp,ind) in item.secondaryMenu" :key="ind" @click="toggleTwo(ind)">
+                                    <span>{{tmp.sedName}}</span>
+                                    <span v-if="tmp.thirdMenu" class="arrow" :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
+                                    <template v-if="tmp.thirdMenu">
+                                        <ul v-show="nowInd==ind" class="col-xs-24">
+                                            <li class="list-third row col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
+                                                <span>{{rmp.thrName}}</span>
+                                            </li>
+                                        </ul>
+                                    </template>
+                                </li>
+                            </ul>
+                        </template>
                     </ul>
+                </template>
             </ul>
         </div>
+
     </div>
 </template>  
 
@@ -130,11 +144,13 @@
         list-style none
     .active
         background-color:#29b0a3
+    .on 
+        background-color #222D32
     .arrow-right
-                display inline-block
-                width 5px
-                height 8px
-                background url(../../assets/img/arrow-right.png) 0 0 no-repeat
+        display inline-block
+        width 5px
+        height 8px
+        background url(../../assets/img/arrow-right.png) 0 0 no-repeat
     .arrow-bottom
         display inline-block
         width 8px
@@ -168,9 +184,9 @@
         .list
             height 44px
             line-height 44px
-            font-size 14px
+            font-size 12px
             .list-icon
-                margin-top 1px
+                margin-top 3px
                 margin-left 1px  
             &:hover
                 background-color #29b0a3
@@ -184,14 +200,14 @@
         .list-two
             height 38px
             line-height 38px
-            font-size 14px
+            font-size 12px
             color #d1d1d1
             background-color #202a2f
         .list-three
             height 38px
             line-height 38px
-            font-size 14px
-            color #fff
+            font-size 12px
+            color white
             background #182125
             &:hover
                 background-color #13191c
@@ -202,7 +218,7 @@
         bottom 0px
         color white
         z-index 999
-        transition all .3s linear
+        transition all .1s linear
         .side-top
             padding 20px 16px 14px 9px
             width 260px
@@ -215,7 +231,6 @@
         .list
             height 44px
             line-height 44px
-            font-size 14px
             width 100%
             .list-icon
                 margin-top 1px
@@ -233,12 +248,35 @@
             width  241px
             color #000
             margin-left 100%
-            .list-third
+            margin-top -43px
+            .list-first
                 height 40px 
                 background #29B0A3
                 line-height 40px 
-                font-size 14px
+                font-size 12px
+                color white
+                >span
+                    margin-left 18px
+            .list-second
+                background #222d32
+                height 40px
+                line-height 40px
                 color #fff
-                
-
+                font-size 12px
+                color white
+                .arrow
+                    display inline-block
+                    margin-left 148px
+                >span
+                    margin-left 18px
+            .list-third
+                background #1E282D
+                height 40px
+                line-height 40px
+                color white
+                font-size 12px
+                >span
+                    margin-left 30px
+                &:hover
+                    background #1A2226
 </style>
