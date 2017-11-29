@@ -59,7 +59,7 @@
             <div class="side-top row">
                 <div class="side-avatar pull-left"></div>
             </div>
-            <ul class="col-xs-24 row">
+            <ul class="col-xs-24">
                 <template v-for="(item,index) in ListData">
                     <li class="list col-xs-24" :key="index" @click="toggle(index)" :class="nowIndex==index?'on':''">
                         <div class="list-icon">
@@ -80,28 +80,28 @@
                                         <div class="col-xs-18 col-xs-offset-3">
                                             <span>{{tmp.sedName}}</span>
                                         </div>
-                                        <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">
+                                        <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">   
                                             <span :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
                                         </div>
-                                    </div>                                    
+                                    </div>                                  
                                     <template v-if="tmp.thirdMenu">
                                         <ul v-show="nowInd==ind" class="col-xs-24">
-                                            <li class="list-third col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
+                                            <li class="list-third row col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
                                                 <div class="col-xs-14 col-xs-offset-5">
                                                     <span>{{rmp.thrName}}</span>
-                                                </div>                                               
+                                                </div>
                                             </li>
                                         </ul>
-                                    </template>                       
+                                    </template>                      
                                 </li>
                             </ul>
-                        </template>
+                        </template> 
                     </ul>
                 </template>
             </ul>
         </div>
     </div>
-</template>  
+</template>
 
 <script>
     import { ListData } from './../../assets/js/list'
@@ -241,6 +241,7 @@
             height 44px
             line-height 44px
             width 100%
+            float left
             .list-icon
                 margin-top 1px
                 margin-left 1px  
@@ -254,7 +255,7 @@
                 margin-left 16px
                 margin-right 14px
         .list-col-ul
-            width  241px
+            width 241px
             color #000
             margin-left 100%
             margin-top -43px
@@ -271,6 +272,8 @@
                 color #fff
                 font-size 12px
                 color white
+                >div
+                    background #222d32
             .list-third
                 background #1E282D
                 height 40px
