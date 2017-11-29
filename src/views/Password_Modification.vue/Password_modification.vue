@@ -57,6 +57,7 @@ input
         box-shadow: 0 0 0 #dddddd;
         border-radius 5px 
 #pwd_modification
+    background #ffffff
     .um-title
         padding:20px 0 20px 20px
         border-bottom:1px solid #DDD
