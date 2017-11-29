@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 展开侧边栏 -->
-        <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'0'}">
+        <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'3.6%'}">
             <div class="side-top row">
                 <div class="side-avatar pull-left"></div>
                 <div class="side-right" :style="{ display : isShow?'':'none'}">
@@ -230,7 +230,6 @@
         transition all .1s linear
         .side-top
             padding 20px 16px 14px 9px
-            width 260px
             position relative
             .side-avatar
                 width 38px
@@ -244,7 +243,7 @@
             float left
             .list-icon
                 margin-top 1px
-                margin-left 1px  
+                margin-left 2px  
             &:hover
                 background-color #222D32
             .li-icon
@@ -252,8 +251,8 @@
                 width 15px
                 height 15px
                 background url(../../assets/img/settings.png) 0 0 no-repeat
-                margin-left 16px
-                margin-right 14px
+                margin-left 17px
+                margin-right 13px
         .list-col-ul
             width 241px
             color #000
