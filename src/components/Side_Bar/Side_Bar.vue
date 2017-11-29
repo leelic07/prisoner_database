@@ -3,7 +3,7 @@
         <!-- 展开侧边栏 -->
         <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'3.6%'}">
             <div class="side-top row">
-                <div class="side-avatar col-xs-2 col-xs-offset-1 pull-left"></div>
+                <div class="side-avatar col-xs-2 pull-left"></div>
                 <div class="side-right" :style="{ display : isShow?'':'none'}">
                     <p class="side-content col-xs-24">管理员</p>
                     <p class="glyphicon glyphicon-map-marker col-xs-1 pull-left"></p>
@@ -57,7 +57,7 @@
         <!-- 折叠侧边栏 -->
         <div v-show="!isShow" id="side-collapse" class="col-xs-4 pull-left" :style="{ width : isShow?'':'3.7%'}">
             <div class="side-top row">
-                <div class="side-avatar pull-left"></div>
+                <div class="side-avatar col-xs-23 col-xs-offset-1 pull-left"></div>
             </div>
             <ul class="col-xs-24">
                 <template v-for="(item,index) in ListData">
@@ -242,8 +242,8 @@
             width 100%
             float left
             .list-icon
-                margin-top 1px
-                margin-left 2px  
+                margin-top 2px
+                margin-left 1px  
             &:hover
                 background-color #222D32
             .li-icon
