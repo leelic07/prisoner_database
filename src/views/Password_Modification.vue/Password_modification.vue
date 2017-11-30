@@ -8,19 +8,19 @@
             <div class="col-xs-24 um-form">
                 <div class="form-box">
                     <div class="form-input-top">
-                        <input type="password" :value="oldPassword" class="form-control" placeholder="原始密码">
+                        <input type="password" v-model="oldPassword" class="form-control" placeholder="原始密码">
                     </div>
                     <div class="form-input-middle">
                         <input :type="inputTypeOld" v-model="newPassword" class="form-control" placeholder="输入新密码">
                         <span class="glyphicon" :class="stateOld?'glyphicon-eye-close':'glyphicon-eye-open'" @click="isHiddenOld"></span>
                     </div>
                     <div class="form-input-bottom">
-                        <input :type="inputTypeNew" v-model="newPassword_again" class="form-control" placeholder="再次输入新密码">
+                        <input :type="inputTypeNew" v-model="newPassword_again" class="form-control" placeholder="再次输入新密码" @blur="validate">
                         <span class="glyphicon" :class="stateNew?'glyphicon-eye-close':'glyphicon-eye-open'"  @click="isHiddenNew"></span>
                     </div>
                     <div class="form-btn">
                         <button class="btn btn-return">返回</button>
-                        <button class="btn btn-confirm">确认</button>
+                        <button class="btn btn-confirm" @click="validate_server">确认</button>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@ export default {
         return {
             breadCrumb:[],//面包屑
             oldPassword:'',
-            newPassword:'12345678',
+            newPassword:'',
             newPassword_again:'',
             inputTypeOld:'password',
             inputTypeNew:'password',
@@ -60,7 +60,42 @@ export default {
             }else{
                 this.inputTypeNew='password'
             }
+        },
+        //按ENTER键时实现登录操作
+        keyUpEnter(){
+            document.onkeyup = e => {
+                if (e.keyCode == 13) {
+                    this.validate_server();
+                }
+            }
+        },
+        validate(){
+            if(this.newPassword !== this.newPassword_again){
+                console.log("两次密码不一致")
+            }
+        },
+        validate_server(){
+            this.axios({
+                method:'PUT',
+                url:'cid/oauth/token',
+                data:{
+                    params:{
+                        oldPassword:this.oldPassword,
+                        newPassword:this.newPassword
+                    }
+                },
+                headers:{
+                    'Content-Type':'application/x-www-form-urlencoded'
+                },
+            }).then(res => {
+                console.log('结果：' + res);
+            }).catch(err => {
+                console.log('错误：' + err);
+            })
         }
+    },
+    mounted() {
+        this.keyUpEnter();
     },
     components:{
       Container,
