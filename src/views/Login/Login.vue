@@ -17,9 +17,10 @@
       </div>
       <!--记住密码-->
       <div class="login-remember checkbox col-xs-20 col-xs-offset-2">
-        <label for="remember">
+        <label for="remember" class="col-xs-12">
           <input id="remember" type="checkbox"> 记住我
         </label>
+        <p class="col-xs-12" v-if="error" v-text="error"></p>
       </div>
       <!--登录按钮-->
       <div class="login-button col-xs-20 col-xs-offset-2">
@@ -43,10 +44,27 @@
         password:'',
         access_token:'',
         refresh_token:'',
-
+        error:''
+      }
+    },
+    watch:{
+      userName(){
+        this.validateUserOrPassword(this.userName)
+      },
+      password(){
+        this.validateUserOrPassword(this.password)
       }
     },
     methods: {
+      //验证用户名和密码不能为空
+      validateUserOrPassword(...args){
+        if(this.isNull(args)){
+          this.error = '用户名或密码不能为空'
+        }else{
+          this.error = ''
+        }
+      },
+
       //按ENTER键时实现登录操作
       keyUpEnter(){
         document.onkeyup = e => {
@@ -58,59 +76,46 @@
 
       //点击登录按钮时执行的方法
       login(){
-        var params = new URLSearchParams();
-        params.append('grant_type','password');
-        params.append('username',this.userName);
-        params.append('password',this.password);
+        if(this.isNull(this.userName,this.password)){
+          this.error = '用户名或密码不能为空';
+        }else {
+          this.error = '';
+          let params = new URLSearchParams();
+          params.append('grant_type','password');
+          params.append('username',this.userName);
+          params.append('password',this.password);
 
-        this.axios({
-          method:'post',
-          url:'oauth/token',
-          data: params,
-          headers:{
-            'Content-Type':'application/x-www-form-urlencoded'
-          },
-          config:{
-            auth:{
-              username:'cid',
-              password:'25d5e2e9b0ed47bbb9d4b82f4abc8c09'
+          this.axios({
+            method:'post',
+            url:'cid/oauth/token',
+            data: params,
+            headers:{
+              'Content-Type':'application/x-www-form-urlencoded'
+            },
+            config:{
+              auth:{
+                username:'cid',
+                password:'25d5e2e9b0ed47bbb9d4b82f4abc8c09'
+              }
             }
-          }
-        }).then(res => {
+          }).then(res => {
             this.access_token = res.data.access_token;
-            this.refresh_token = res.data.resfresh_token;
+            this.refresh_token = res.data.refresh_token;
             window.sessionStorage.setItem('access_token',this.access_token)
             window.localStorage.setItem('refresh_token',this.refresh_token)
-        }).catch(err => {
-            console.log('错误：' + err);
-        })
 
-//        this.axios.post('cid/oauth/token', {
-//          params:{
-//            grant_type: 'password',
-//            username: this.userName,
-//            password: this.password
-//          }
-//        }, {
-//          headers:{
-//            'Content-Type':'application/x-www-form-urlencoded'
-//          }
-//        }).then(res => {
-//          console.log(res);
-//        }).catch(err => {
-//          console.log(err);
-//        })
+            this.$router.push({
+              path:'/punishment_change'
+            })
+          }).catch(err => {
+            console.log(err);
+          })
+        }
+      },
 
-//        this.axios.get('health').then(res => {
-//            console.log(res);
-//        }).catch(err => {
-//            console.log(err);
-//        })
-      }
     },
     mounted() {
         this.keyUpEnter();
-//        this.getAccessToken();
     }
   }
 </script>
@@ -163,6 +168,9 @@
         color: #999
         label
           line-height: 20px
+        p
+          margin-top:3px
+          color:#F53C08
     .login-footer
       position: absolute
       bottom: 18px

@@ -1,19 +1,32 @@
-import { 
-	CHANGESHOW
+import {
+  CHANGESHOW,
+  SHOWREMIND,
+  HIDEREMIND
 } from  './types'
+
 import getters from './getters'
-const state={
-	isShow:true
+
+//vuex状态属性
+const state = {
+  isShow: true,
+  remind: false
 }
 
-const mutations={
-	[CHANGESHOW](state){
-		state.isShow=!state.isShow
-	}
+//设置状态属性的变化
+const mutations = {
+  [CHANGESHOW](state){
+    state.isShow = !state.isShow
+  },
+  [SHOWREMIND](state){
+    state.remind = true
+  },
+  [HIDEREMIND](state){
+    state.remind = false
+  }
 }
 
 export default {
-	state,
-	mutations,
-	getters
+  state,
+  mutations,
+  getters
 }

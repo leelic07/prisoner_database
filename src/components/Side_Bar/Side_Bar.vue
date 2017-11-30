@@ -7,7 +7,7 @@
                 <div class="side-right" :style="{ display : isShow?'':'none'}">
                     <p class="side-content col-xs-24">管理员</p>
                     <p class="glyphicon glyphicon-map-marker col-xs-1 pull-left"></p>
-                    <p class="side-right-bottom col-xs-10">长沙监狱</p>    
+                    <p class="side-right-bottom col-xs-10">长沙监狱</p>
                 </div>
             </div>
             <ul class="col-xs-24">
@@ -18,9 +18,9 @@
                             <span class="li-icon"></span>
                         </div>
                         <div class="col-xs-16 col-xs-offset-1" :style="{ display : isShow?'':'none'}">
-                            <span>{{item.ListName}}</span>  
+                            <span>{{item.ListName}}</span>
                         </div>
-                        <div class="col-xs-2 pull-right">   
+                        <div class="col-xs-2 pull-right">
                             <span :class="nowIndex==index?'arrow-bottom':'arrow-right'" :style="{ display : isShow?'':'none'}"></span>
                         </div>
                     </li>
@@ -32,11 +32,11 @@
                                     <div class="col-xs-14 col-xs-offset-6">
                                         <span>{{tmp.sedName}}</span>
                                     </div>
-                                    <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">   
+                                    <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">
                                         <span :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
                                     </div>
                                 </div>
-                                
+
                                 <!--三级菜单-->
                                 <template v-if="tmp.thirdMenu">
                                     <ul v-show="nowInd==ind" class="col-xs-24">
@@ -47,7 +47,7 @@
                                         </li>
                                     </ul>
                                 </template>
-                            </li>                             
+                            </li>
                         </ul>
                     </template>
                 </template>
@@ -71,7 +71,7 @@
                         <li class="list-first" @click="toggle(index)" :style="{ display : nowIndex==index?'block':'none'}" :key="index">
                             <div class="col-xs-8 col-xs-offset-3">
                                 <span>{{item.ListName}}</span>
-                            </div>      
+                            </div>
                         </li>
                         <template v-if="item.secondaryMenu">
                             <ul class="col-xs-24" v-show="nowIndex==index" :key="index">
@@ -80,10 +80,10 @@
                                         <div class="col-xs-18 col-xs-offset-3">
                                             <span>{{tmp.sedName}}</span>
                                         </div>
-                                        <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">   
+                                        <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">
                                             <span :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
                                         </div>
-                                    </div>                                  
+                                    </div>
                                     <template v-if="tmp.thirdMenu">
                                         <ul v-show="nowInd==ind" class="col-xs-24">
                                             <li class="list-third row col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
@@ -92,10 +92,10 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                    </template>                      
+                                    </template>
                                 </li>
                             </ul>
-                        </template> 
+                        </template>
                     </ul>
                 </template>
             </ul>
@@ -124,7 +124,7 @@
                 }else{
                     this.nowIndex=index
                     this.nowInd = -1
-                }     
+                }
             },
             //二级菜单点击缩放方法
             toggleTwo(ind){
@@ -132,12 +132,14 @@
                     this.nowInd = -1
                 }else{
                     this.nowInd = ind
-                }     
+                }
             }
         },
-         computed:mapGetters([
-            'isShow'
-        ]),
+        computed:{
+          ...mapGetters({
+            isShow:'isShow'
+          })
+        },
         mounted:function(){
             console.log(this.isShow)
         }
@@ -153,7 +155,7 @@
         list-style none
     .active
         background-color:#29b0a3
-    .on 
+    .on
         background-color #222D32
     .arrow-right
         display inline-block
@@ -196,7 +198,7 @@
             font-size 12px
             .list-icon
                 margin-top 3px
-                margin-left 1px  
+                margin-left 1px
             &:hover
                 background-color #29b0a3
             .li-icon
@@ -243,7 +245,7 @@
             float left
             .list-icon
                 margin-top 2px
-                margin-left 1px  
+                margin-left 1px
             &:hover
                 background-color #222D32
             .li-icon
@@ -259,9 +261,9 @@
             margin-left 100%
             margin-top -43px
             .list-first
-                height 40px 
+                height 40px
                 background #29B0A3
-                line-height 40px 
+                line-height 40px
                 font-size 12px
                 color white
             .list-second
