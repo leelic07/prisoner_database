@@ -1,5 +1,5 @@
 export default {
-    isShow:(state)=>{
-        return state.isShow
-    }
+  isShow:(state)=>{
+    return state.isShow
+ }
 }

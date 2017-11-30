@@ -19,7 +19,7 @@ Object.keys(Validate).forEach((key)=>{
 Vue.prototype.axios = axios;
 
 //设置axois的默认请求地址
-axios.defaults.baseURL = 'http://10.10.10.119:8080/cid'
+axios.defaults.baseURL = 'http://10.10.10.119:8080/'
 
 //axios设置跨域请求
 axios.defaults.withCredentials=true;

@@ -65,7 +65,7 @@
 
         this.axios({
           method:'post',
-          url:'oauth/token',
+          url:'cid/oauth/token',
           data: params,
           headers:{
             'Content-Type':'application/x-www-form-urlencoded'

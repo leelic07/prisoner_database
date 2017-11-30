@@ -7,8 +7,8 @@ import mutations from './mutations'
 import actions from './actions'
 
 export default new Vuex.Store({
-    modules:{
-        mutations
-    },
-    actions
+  modules:{
+    mutations
+  },
+  actions
 })
