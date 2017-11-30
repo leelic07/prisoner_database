@@ -9,5 +9,5 @@ export default {
   hideRemind: ({commit}) => {
     commit(types.HIDEREMIND)
   }
-
 }
+
