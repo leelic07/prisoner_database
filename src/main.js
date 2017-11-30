@@ -19,19 +19,33 @@ Object.keys(Validate).forEach((key)=>{
 Vue.prototype.axios = axios;
 
 //设置axois的默认请求地址
-axios.defaults.baseURL = 'http://10.10.10.119:8080/'
+axios.defaults.baseURL = 'http://10.10.10.119:8080/cid'
 
 //axios设置跨域请求
 axios.defaults.withCredentials=true;
 
 //ajax请求拦截器
 axios.interceptors.request.use(function(config){
-  if(config.url == config.baseURL + 'login'){
+  // if(config.url == config.baseURL + 'login'){
     // store.dispatch('showLoginLoading');
-  }else{
+  // }else{
     // store.dispatch('showLoading');
+  // }
+  if(config.method == 'get') {
+    if(config.params) {
+      config.params.access_token = window.sessionStorage.getItem('access_token');
+    } else {
+      config.url += '?access_token=' + window.sessionStorage.getItem('access_token');
+    }
   }
+
+  if(config.method == 'post' && config.url != config.baseURL+'login') {
+    config.data += '&userId=' + window.sessionStorage.getItem('access_token');
+  }
+  // config.params.access_token = window.sessionStorage.getItem('access_token');
+
   return config;
+
 },function(err){
   return Promise.reject(err);
 });

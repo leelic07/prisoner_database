@@ -47,11 +47,6 @@
       }
     },
     methods: {
-      //点击登录按钮时执行的方法
-      login(){
-        console.log('login');
-      },
-
       //按ENTER键时实现登录操作
       keyUpEnter(){
         document.onkeyup = e => {
@@ -61,8 +56,8 @@
         }
       },
 
-      //获取accesstoken的方法
-      getAccessToken(){
+      //点击登录按钮时执行的方法
+      login(){
         var params = new URLSearchParams();
         params.append('grant_type','password');
         params.append('username',this.userName);
@@ -70,8 +65,8 @@
 
         this.axios({
           method:'post',
-          url:'cid/oauth/token',
-          data:params,
+          url:'oauth/token',
+          data: params,
           headers:{
             'Content-Type':'application/x-www-form-urlencoded'
           },
@@ -82,9 +77,10 @@
             }
           }
         }).then(res => {
-            console.log('结果：' + res);
-            this.access_token = res.access_token;
-            this.refresh_token = res.resfresh_token;
+            this.access_token = res.data.access_token;
+            this.refresh_token = res.data.resfresh_token;
+            window.sessionStorage.setItem('access_token',this.access_token)
+            window.localStorage.setItem('refresh_token',this.refresh_token)
         }).catch(err => {
             console.log('错误：' + err);
         })
@@ -104,11 +100,17 @@
 //        }).catch(err => {
 //          console.log(err);
 //        })
+
+//        this.axios.get('health').then(res => {
+//            console.log(res);
+//        }).catch(err => {
+//            console.log(err);
+//        })
       }
     },
     mounted() {
         this.keyUpEnter();
-        this.getAccessToken();
+//        this.getAccessToken();
     }
   }
 </script>
