@@ -17,7 +17,7 @@
               <div class="form-input-bottom">
                 <input :type="inputTypeNew" v-model="newPassword_again" class="form-control" placeholder="再次输入新密码" @keyup.enter="keyUpEnter">
                   <span class="glyphicon" :class="stateNew?'glyphicon-eye-close':'glyphicon-eye-open'"  @click="isHiddenNew"></span>
-                <!-- <span>两次密码不一致</span> -->
+                <span class="prompt-msg">{{error}}</span>
               </div>
               <div class="form-btn">
                 <button class="btn btn-return" @click="goBack">返回</button>
@@ -39,10 +39,11 @@ export default {
       oldPassword:'',
       newPassword:'',
       newPassword_again:'',
-      inputTypeOld:'password',
-      inputTypeNew:'password',
-      stateOld:true,
-      stateNew:true,
+      inputTypeOld:'password',//type类型
+      inputTypeNew:'password',//type类型
+      stateOld:true,//控制密码可见与不可见
+      stateNew:true,//控制密码可见与不可见
+      error:''
     }
   },
   methods:{
@@ -70,34 +71,75 @@ export default {
     keyUpEnter(){
       this.Validate();
     },
-    Validate(){
-      if(this.newPassword !== this.newPassword_again){
-        alert("两次密码不一致")
-      }else if(this.newPassword===''){
-        alert("密码不能为空")
-      }else if(this.newPassword_again===''){
-        alert("新密码不能为空")             
-      }else{
-        this.axios.defaults.headers.common['Authorization'] = `Bearer ${window.sessionStorage.getItem('access+token')}`;
-        this.axios({
-          method:'PUT',
-          url:'users/me/password',
-          data:{
-            oldPassword:this.oldPassword,
-            newPassword:this.newPassword
-          }
-        }).then(res => {
-          console.log('结果：' + res);
-        }).catch(err => {
-          console.log('错误：' + err);
-        })
-      }
+    Validate(){ 
+        if(this.oldPassword === ''||this.newPassword === ''||this.newPassword_again === ''){
+            this.error = '密码不能为空，请检查！'
+        }else if(this.newPassword !== this.newPassword_again){
+            this.error = '两次密码不一致，请检查！'
+        }else{
+            //this.axios.defaults.headers.common['Authorization'] = `Bearer ${window.sessionStorage.getItem('access_token')}`;
+            this.axios({
+              type:'GET',
+              url:'http://jsonplaceholder.typicode.com/posts '
+              //headers:{'Authorization':`Bearer ${window.sessionStorage.getItem('access_token')}`},
+              // data:{
+              //    oldPassword:this.oldPassword,
+              //    newPassword:this.newPassword
+              // }
+            }).then(res => {
+            console.log('结果：' + res);
+            }).catch(err => {
+            console.log('错误：' + err);
+            })
+            // $.ajax({
+            //   type:'GET',
+            //   url:'http://10.10.10.119:8080/cid/api/users',
+            //   // data:{
+            //   //   oldPassword:this.oldPassword,
+            //   //   newPassword:this.newPassword
+            //   // },
+            //   headers:{'Authorization':`Bearer ${window.sessionStorage.getItem('access_token')}`},
+            // }).then(res => {
+            //   console.log('结果：' + res);
+            // }).catch(err => {
+            //   console.log('错误：' + err);
+            // })
+            // $.ajax("http://10.10.10.119:8080/cid/api/users/me/password",
+            // {
+            //   headers: {'Authorization': `Bearer ${window.sessionStorage.getItem('access_token')}`}
+            // },).then(function(val){
+            //   console.log(val);
+            // })
+        }
     },
   },
+  watch:{
+      oldPassword(){
+        if(this.isNull(this.oldPassword)){
+          this.error = '密码不能为空，请检查！'
+        }else{
+          this.error = ''
+        }
+      },
+      newPassword(){
+        if(this.isNull(this.newPassword)){
+          this.error = '密码不能为空，请检查！'
+        }else{
+          this.error = ''
+        }
+      },
+      newPassword_again(){
+        if(this.isNull(this.newPassword_again)){
+          this.error = '密码不能为空，请检查！'
+        }else{
+          this.error = ''
+        }
+      }
+    },
   components:{
     Container,
     Bread
- }
+  }
 }
 </script>
 
@@ -120,9 +162,10 @@ export default {
         .form-input-top
           margin-bottom 20px
           input
+            width 340px
             background #F5F5F5
             font-size 12px
-            color #999999
+            color #999999                       
             &:focus  
               outline none
               border-color #dddddd
@@ -132,9 +175,11 @@ export default {
           margin-bottom 20px
           position relative
           input
+            width 340px
             font-size 12px
             color #999999
             background #F5F5F5
+            padding-right 28px                        
             &:focus  
               outline none
               border-color #dddddd
@@ -151,9 +196,11 @@ export default {
           margin-bottom 30px
           position relative
           input
+            width 340px
             font-size 12px
             color #999999
             background #F5F5F5
+            padding-right 28px            
             &:focus  
               outline none
               border-color #dddddd
@@ -166,6 +213,12 @@ export default {
             transform translateY(-50%)
             color #999999
             font-size 15px
+            padding-left 15px
+          .prompt-msg
+            position absolute
+            left 10px
+            margin-top 5px
+            color red 
         .form-btn
           width 340px
           .btn-return

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 展开侧边栏 -->
-    <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'3.6%'}">
+    <div id="side-bar" class="col-xs-4 pull-left" :style="{ width : isShow?'':'0'}">
       <div class="side-top row">
         <div class="side-avatar col-xs-2 pull-left"></div>
         <div class="side-right" :style="{ display : isShow?'':'none'}">
@@ -29,7 +29,7 @@
             <ul v-show="nowIndex==index" :key="index" class="col-xs-24">
               <li class="list-two" v-for="(tmp,ind) in item.secondaryMenu" :key="ind">
                 <div @click="toggleTwo(ind)">
-                  <div class="col-xs-14 col-xs-offset-6">
+                  <div class="col-xs-16 col-xs-offset-6">
                     <span>{{tmp.sedName}}</span>
                   </div>
                   <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">   
@@ -55,7 +55,7 @@
     </div>
 
     <!-- 折叠侧边栏 -->
-    <div v-show="!isShow" id="side-collapse" class="col-xs-4 pull-left" :style="{ width : isShow?'':'3.7%'}">
+    <div v-show="!isShow" id="side-collapse" class="col-xs-4 pull-left" :style="{ width : isShow?'':'54px'}">
       <div class="side-top row">
         <div class="side-avatar col-xs-23 col-xs-offset-1 pull-left"></div>
       </div>
@@ -83,7 +83,7 @@
                     <div v-if="tmp.thirdMenu" class="col-xs-2 pull-right">   
                       <span :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
                     </div>
-                  </div>                                  
+                  </div>                                 
                   <template v-if="tmp.thirdMenu">
                     <ul v-show="nowInd==ind" class="col-xs-24">
                       <li class="list-third row col-xs-24" v-for="(rmp,inde) in tmp.thirdMenu" :key="inde">
@@ -135,9 +135,11 @@
         }     
       }
     },
-    computed:mapGetters([
-      'isShow'
-    ])
+    computed:{
+        ...mapGetters({
+            isShow:'isShow'
+        })
+    }
   } 
 </script>
 
@@ -275,6 +277,6 @@
         line-height 40px
         color white
         font-size 12px
-         &:hover
+        &:hover
           background #1A2226
 </style>

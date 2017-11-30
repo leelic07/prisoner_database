@@ -52,7 +52,7 @@
     &.toggleSize
       transition(all,.3s,linear)
       width:96.3%
-      margin-left:3.7%
+      margin-left:54px
     .router-content
       background:background-color
       border-radius(2px)
