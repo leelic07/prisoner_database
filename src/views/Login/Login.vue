@@ -98,7 +98,7 @@
               password:'25d5e2e9b0ed47bbb9d4b82f4abc8c09'
             }
           }}).then(res => {
-            this.access_token = res.data.access_token;
+            this.access_token = res.data.access_token;  
             this.refresh_token = res.data.refresh_token;
             window.sessionStorage.setItem('access_token',this.access_token)
             window.localStorage.setItem('refresh_token',this.refresh_token)

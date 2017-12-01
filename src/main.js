@@ -30,7 +30,7 @@ axios.interceptors.request.use(function (config) {
   let access_token = window.sessionStorage.getItem('access_token');
   let refresh_token = window.localStorage.getItem('refresh_token');
   // console.log(config)
-  if (config.url == 'oauth/token') {
+  if (config.url == '/oauth/token') {
 
   } else {
     if (access_token) {

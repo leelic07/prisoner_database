@@ -26,12 +26,18 @@
             </div>
           </div>
         </div>
+        <!--提示框-->
+      <!-- <Remind v-if="true" :status="remind.status" :msg="remind.msg"></Remind> -->
+        <!--模态框-->
+      <Modal :method="modal.method" :msg="modal.msg"></Modal>
     </Container>
 </template>
 
 <script>
   import Container from '@/components/Container/Container'
   import Bread from '@/components/Bread/Bread'
+  import Remind from '@/components/Remind/Remind'
+  import Modal from '@/components/Modal/Modal'
 export default {
   data(){
     return {
@@ -43,7 +49,15 @@ export default {
       inputTypeNew:'password',//type类型
       stateOld:true,//控制密码可见与不可见
       stateNew:true,//控制密码可见与不可见
-      error:''
+      error:'',
+      // remind: {//提示框信息
+      //   status: '',
+      //   msg: ''
+      // },
+      modal: {//模态框提示信息
+          msg: '',
+          method: ''
+        }
     }
   },
   methods:{
@@ -72,43 +86,46 @@ export default {
       this.Validate();
     },
     Validate(){ 
-        if(this.newPassword === ''||this.newPassword_again === ''){
-            this.error = '密码不能为空，请检查！'
-        }else if(this.newPassword !== this.newPassword_again){
-            this.error = '两次密码不一致，请检查！'
-        }else{
-            // this.axios({
-            //   type:'PUT',
-            //   url:'/api/users/me/password',
-            //   data:{
-            //     oldPassword:this.oldPassword,
-            //     newPassword:this.newPassword
-            //   },
-            // }).then(res => {
-            //   //this.oldPassword = res.oldPassword;
-            //   res.newPassword = this.newPassword
-            // }).catch(err => {
-            //   console.log('错误：' + err);
-            // })
-            
-        }
+        // if(this.oldPassword === ''||this.newPassword === ''||this.newPassword_again === ''){
+        //     this.error = '密码不能为空，请检查！'
+        // }else if(this.newPassword !== this.newPassword_again){
+        //     this.error = '两次密码不一致，请检查！'
+        // }else{
+            console.log(this.modal)
+            this.modal = {
+            msg: '确定修改密码?',
+            method: this.confirmModify
+            }
+            $('#modal').modal();
+        // }
     },
-  },
-  mounted(){
-    this.axios.get('/api/users/me/password').then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
-    })
+    //点击确定保存修改信息时执行的方法
+    confirmModify(){
+      this.axios({
+        method:'PUT',
+        url:'/api/users/me/password',
+        data:{
+          oldPassword:this.oldPassword,
+          newPassword:this.newPassword
+        },
+      }).then(res => {
+        this.remind.msg = res.message;
+        this.remind.status = res.code;
+        console.log(res,res.message,res.code)
+      }).catch(err => {
+        console.log('错误：' + err);
+        console.log(err.message,err.code)
+      })
+    }
   },
   watch:{
-      // oldPassword(){
-      //   if(this.isNull(this.oldPassword)){
-      //     this.error = '密码不能为空，请检查！'
-      //   }else{
-      //     this.error = ''
-      //   }
-      // },
+      oldPassword(){
+        if(this.isNull(this.oldPassword)){
+          this.error = '密码不能为空，请检查！'
+        }else{
+          this.error = ''
+        }
+      },
       newPassword(){
         if(this.isNull(this.newPassword)){
           this.error = '密码不能为空，请检查！'
@@ -126,7 +143,9 @@ export default {
     },
   components:{
     Container,
-    Bread
+    Bread,
+    // Remind,
+    Modal
   }
 }
 </script>
