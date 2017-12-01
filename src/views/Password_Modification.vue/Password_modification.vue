@@ -72,41 +72,43 @@ export default {
       this.Validate();
     },
     Validate(){ 
-        if(this.oldPassword === ''||this.newPassword === ''||this.newPassword_again === ''){
+        if(this.newPassword === ''||this.newPassword_again === ''){
             this.error = '密码不能为空，请检查！'
         }else if(this.newPassword !== this.newPassword_again){
             this.error = '两次密码不一致，请检查！'
         }else{
-            this.axios({
-              type:'PUT',
-              url:'/api/users/me/password',
-              data:{
-                 oldPassword:this.oldPassword
-              },
-            }).then(res => {
-              //this.oldPassword = res.oldPassword;
-              res.newPassword = this.newPassword
-            }).catch(err => {
-              console.log('错误：' + err);
-            })
-            // this.axios.put('/api/users/me/password', {
-            //    oldPassword:this.oldPassword
+            // this.axios({
+            //   type:'PUT',
+            //   url:'/api/users/me/password',
+            //   data:{
+            //     oldPassword:this.oldPassword,
+            //     newPassword:this.newPassword
+            //   },
             // }).then(res => {
-            //   console.log(res);
+            //   //this.oldPassword = res.oldPassword;
+            //   res.newPassword = this.newPassword
             // }).catch(err => {
-            //   console.log(err);
+            //   console.log('错误：' + err);
             // })
+            
         }
     },
   },
+  mounted(){
+    this.axios.get('/api/users/me/password').then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  },
   watch:{
-      oldPassword(){
-        if(this.isNull(this.oldPassword)){
-          this.error = '密码不能为空，请检查！'
-        }else{
-          this.error = ''
-        }
-      },
+      // oldPassword(){
+      //   if(this.isNull(this.oldPassword)){
+      //     this.error = '密码不能为空，请检查！'
+      //   }else{
+      //     this.error = ''
+      //   }
+      // },
       newPassword(){
         if(this.isNull(this.newPassword)){
           this.error = '密码不能为空，请检查！'
