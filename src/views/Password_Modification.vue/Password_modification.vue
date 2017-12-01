@@ -25,11 +25,11 @@
               </div>
             </div>
           </div>
+          <!--提示框-->
+          <Remind v-if="remindShow" :status="remind.status" :msg="remind.msg"></Remind>
+          <!--模态框-->
+          <Modal :method="modal.method" :msg="modal.msg"></Modal>
         </div>
-        <!--提示框-->
-      <!-- <Remind v-if="true" :status="remind.status" :msg="remind.msg"></Remind> -->
-        <!--模态框-->
-      <Modal :method="modal.method" :msg="modal.msg"></Modal>
     </Container>
 </template>
 
@@ -38,6 +38,7 @@
   import Bread from '@/components/Bread/Bread'
   import Remind from '@/components/Remind/Remind'
   import Modal from '@/components/Modal/Modal'
+  import {mapGetters} from 'vuex'
 export default {
   data(){
     return {
@@ -50,15 +51,20 @@ export default {
       stateOld:true,//控制密码可见与不可见
       stateNew:true,//控制密码可见与不可见
       error:'',
-      // remind: {//提示框信息
-      //   status: '',
-      //   msg: ''
-      // },
+      remind: {//提示框信息
+        status: '',
+        msg: ''
+      },
       modal: {//模态框提示信息
           msg: '',
           method: ''
         }
     }
+  },
+  computed: {
+    ...mapGetters({
+      remindShow:'remindShow'
+    })
   },
   methods:{
     isHiddenOld(){
@@ -91,10 +97,9 @@ export default {
         }else if(this.newPassword !== this.newPassword_again){
             this.error = '两次密码不一致，请检查！'
         }else{
-            console.log(this.modal)
             this.modal = {
             msg: '确定修改密码?',
-            method: this.confirmModify()
+            method: this.confirmModify
             }
             $('#modal').modal();
         }
@@ -109,12 +114,20 @@ export default {
           newPassword:this.newPassword
         },
       }).then(res => {
-        this.remind.msg = res.message;
-        this.remind.status = res.code;
-        console.log(res,res.message,res.code)
+        $('#modal').modal('hide');
+          this.remind = {
+            status:'success',
+            msg:'修改个人密码成功'
+          }
+          this.$store.dispatch('showRemind');
       }).catch(err => {
         console.log('错误：' + err);
-        console.log(err.message,err.code)
+        $('#modal').modal('hide');
+        this.remind = {
+          status:'failed',
+          msg:'原密码输入错误，请检查！'
+        }
+        this.$store.dispatch('showRemind');
       })
     }
   },
@@ -144,7 +157,7 @@ export default {
   components:{
     Container,
     Bread,
-    // Remind,
+    Remind,
     Modal
   }
 }
