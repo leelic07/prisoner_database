@@ -29,23 +29,24 @@ axios.defaults.withCredentials = true;
 axios.interceptors.request.use(function (config) {
   let access_token = window.sessionStorage.getItem('access_token');
   let refresh_token = window.localStorage.getItem('refresh_token');
-  // console.log(config)
-  if (config.url == 'oauth/token') {
+  // console.log(config.url)
+  if (config.url == '/oauth/token') {
 
   } else {
     if (access_token) {
       config.headers.common['Authorization'] = `Bearer ${access_token}`//每次发送请求是给请求头加上access_token
     }
   }
-  console.log(config);
+  // console.log(config);
   return config;
 }, function (err) {
+  // console.log(err);
   return Promise.reject(err);
 });
 
 //ajax响应拦截器
 axios.interceptors.response.use(function (response) {
-
+  // console.log(response);
   return response;
 }, function (err) {
   return Promise.reject(err);
