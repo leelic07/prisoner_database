@@ -77,38 +77,24 @@ export default {
         }else if(this.newPassword !== this.newPassword_again){
             this.error = '两次密码不一致，请检查！'
         }else{
-            //this.axios.defaults.headers.common['Authorization'] = `Bearer ${window.sessionStorage.getItem('access_token')}`;
             this.axios({
-              type:'GET',
-              url:'http://jsonplaceholder.typicode.com/posts '
-              //headers:{'Authorization':`Bearer ${window.sessionStorage.getItem('access_token')}`},
-              // data:{
-              //    oldPassword:this.oldPassword,
-              //    newPassword:this.newPassword
-              // }
+              type:'PUT',
+              url:'/api/users/me/password',
+              data:{
+                 oldPassword:this.oldPassword
+              },
             }).then(res => {
-            console.log('结果：' + res);
+              //this.oldPassword = res.oldPassword;
+              res.newPassword = this.newPassword
             }).catch(err => {
-            console.log('错误：' + err);
+              console.log('错误：' + err);
             })
-            // $.ajax({
-            //   type:'GET',
-            //   url:'http://10.10.10.119:8080/cid/api/users',
-            //   // data:{
-            //   //   oldPassword:this.oldPassword,
-            //   //   newPassword:this.newPassword
-            //   // },
-            //   headers:{'Authorization':`Bearer ${window.sessionStorage.getItem('access_token')}`},
+            // this.axios.put('/api/users/me/password', {
+            //    oldPassword:this.oldPassword
             // }).then(res => {
-            //   console.log('结果：' + res);
+            //   console.log(res);
             // }).catch(err => {
-            //   console.log('错误：' + err);
-            // })
-            // $.ajax("http://10.10.10.119:8080/cid/api/users/me/password",
-            // {
-            //   headers: {'Authorization': `Bearer ${window.sessionStorage.getItem('access_token')}`}
-            // },).then(function(val){
-            //   console.log(val);
+            //   console.log(err);
             // })
         }
     },
