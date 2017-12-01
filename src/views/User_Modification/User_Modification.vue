@@ -116,7 +116,7 @@
         this.axios.put('/api/users/me', {
           name: this.name
         }).then(res => {
-          console.log(res);
+//          console.log(res.data.data.code);
           this.getUserMsg();
           $('.modal').modal('hide');
           this.remind = {

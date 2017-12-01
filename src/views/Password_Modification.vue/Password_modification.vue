@@ -85,7 +85,7 @@ export default {
     keyUpEnter(){
       this.Validate();
     },
-    Validate(){ 
+    Validate(){
         if(this.oldPassword === ''||this.newPassword === ''||this.newPassword_again === ''){
             this.error = '密码不能为空，请检查！'
         }else if(this.newPassword !== this.newPassword_again){
@@ -150,7 +150,7 @@ export default {
 }
 </script>
 
-<style type="text/stylus" lang="stylus" scoped> 
+<style type="text/stylus" lang="stylus" scoped>
 #pwd_modification
   background #ffffff
   .um-title
@@ -172,8 +172,8 @@ export default {
             width 340px
             background #F5F5F5
             font-size 12px
-            color #999999                       
-            &:focus  
+            color #999999
+            &:focus
               outline none
               border-color #dddddd
               background-color #fff
@@ -186,8 +186,8 @@ export default {
             font-size 12px
             color #999999
             background #F5F5F5
-            padding-right 28px                        
-            &:focus  
+            padding-right 28px
+            &:focus
               outline none
               border-color #dddddd
               background-color #fff
@@ -207,8 +207,8 @@ export default {
             font-size 12px
             color #999999
             background #F5F5F5
-            padding-right 28px            
-            &:focus  
+            padding-right 28px
+            &:focus
               outline none
               border-color #dddddd
               background-color #fff
@@ -225,7 +225,7 @@ export default {
             position absolute
             left 10px
             margin-top 5px
-            color red 
+            color red
         .form-btn
           width 340px
           .btn-return
@@ -240,6 +240,6 @@ export default {
             height 36px
             margin-left 14px
             background #2196f3
-            color #ffffff 
-            font-size 12px              
+            color #ffffff
+            font-size 12px
 </style>

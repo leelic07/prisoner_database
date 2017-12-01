@@ -32,11 +32,15 @@
     <div class="login-footer text-center col-xs-24">
       <p>Copyright &copy; 2006-2017 罪犯数据库</p>
     </div>
+
+    <!--提示框-->
+    <Remind v-if="remindShow" :status="remind.status" :msg="remind.msg"></Remind>
   </div>
 </template>
 
 <script>
-
+  import Remind from '@/components/Remind/Remind'
+  import {mapGetters} from 'vuex'
   export default {
     data() {
       return {
@@ -44,7 +48,8 @@
         password:'',
         access_token:'',
         refresh_token:'',
-        error:''
+        error:'',
+        remind:{}//提示框信息
       }
     },
     watch:{
@@ -54,6 +59,11 @@
       password(){
         this.validateUserOrPassword(this.password)
       }
+    },
+    computed:{
+      ...mapGetters({
+        remindShow:'remindShow'
+      })
     },
     methods: {
       //验证用户名和密码不能为空
@@ -97,7 +107,6 @@
               password:'25d5e2e9b0ed47bbb9d4b82f4abc8c09'
             }
           }}).then(res => {
-//            console.log('result:' + res);
             this.access_token = res.data.access_token;
             this.refresh_token = res.data.refresh_token;
             window.sessionStorage.setItem('access_token',this.access_token)
@@ -106,12 +115,13 @@
               path:'/punishment_change'
             })
           }).catch(err => {
-//          console.log(err);
-//            this.modal = {
+            console.log(err);
+//            this.remind = {
 //              msg:'用户名或密码错误',
-//              method:this.closeModal
+//              status:'failed'
 //            }
-//            $('.modal').modal();
+//            this.$store.dispatch('showRemind');
+            this.error = '用户名或密码错误'
           })
         }
       },
@@ -119,7 +129,9 @@
       closeModal(){
         $('.modal').modal('hide')
       }
-
+    },
+    components:{
+      Remind
     },
     mounted() {
         this.keyUpEnter();

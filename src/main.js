@@ -46,7 +46,7 @@ axios.interceptors.request.use(function (config) {
 
 //ajax响应拦截器
 axios.interceptors.response.use(function (response) {
-  // console.log(response);
+  console.log(response);
   return response;
 }, function (err) {
   return Promise.reject(err);
