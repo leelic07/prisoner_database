@@ -23,7 +23,7 @@
         <div class="content-down col-xs-24">
           <div class="left pull-left">
             <label for="updatedTime">最后更新时间</label>
-            <input id="updatedTime" type="text" :value="updatedTime" class="form-control" disabled>
+            <input id="updatedTime" type="text" class="form-control" disabled v-model="lastUpdatedTime">
           </div>
           <div class="right pull-left">
             <label for="name">姓名</label>
@@ -71,6 +71,7 @@
         username: '',//用户名
         createdTime: '',//创建时间
         updatedTime: '',//最后创建时间
+        lastUpdatedTime:'',//最后更新时间
         name: '',//姓名
         remind: {//提示框信息
           status: '',
@@ -83,11 +84,9 @@
       }
     },
     computed: {
-      remindShow: {
-        get(){
-          return this.$store.getters.remindShow;
-        }
-      }
+      ...mapGetters({
+        remindShow:'remindShow'
+      })
     },
     components: {
       Container,
@@ -117,10 +116,14 @@
         this.axios.put('/api/users/me', {
           name: this.name
         }).then(res => {
-          let data = res.data;
-          this.createdTime = data.createdTime;
-          this.name = data.name;
-          this.username = data.username;
+          console.log(res);
+          this.getUserMsg();
+          $('.modal').modal('hide');
+          this.remind = {
+            status:'success',
+            msg:'修改个人信息成功'
+          }
+          this.$store.dispatch('showRemind');
         }).catch(err => {
           console.log(err);
         })
@@ -130,6 +133,7 @@
         this.axios.get('/api/users/me').then(res => {
           let data = res.data;
           this.createdTime = data.createdTime;
+          this.lastUpdatedTime = data.lastUpdatedTime;
           this.name = data.name;
           this.username = data.username;
         }).catch(err => {

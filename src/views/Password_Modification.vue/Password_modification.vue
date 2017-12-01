@@ -86,18 +86,18 @@ export default {
       this.Validate();
     },
     Validate(){ 
-        // if(this.oldPassword === ''||this.newPassword === ''||this.newPassword_again === ''){
-        //     this.error = '密码不能为空，请检查！'
-        // }else if(this.newPassword !== this.newPassword_again){
-        //     this.error = '两次密码不一致，请检查！'
-        // }else{
+        if(this.oldPassword === ''||this.newPassword === ''||this.newPassword_again === ''){
+            this.error = '密码不能为空，请检查！'
+        }else if(this.newPassword !== this.newPassword_again){
+            this.error = '两次密码不一致，请检查！'
+        }else{
             console.log(this.modal)
             this.modal = {
             msg: '确定修改密码?',
-            method: this.confirmModify
+            method: this.confirmModify()
             }
             $('#modal').modal();
-        // }
+        }
     },
     //点击确定保存修改信息时执行的方法
     confirmModify(){
