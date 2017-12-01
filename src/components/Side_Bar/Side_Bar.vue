@@ -28,7 +28,6 @@
           <template v-if="item.secondaryMenu">
             <ul v-show="nowIndex==index" :key="index" class="col-xs-24">
               <li class="list-two" v-for="(tmp,ind) in item.secondaryMenu" :key="ind">
-                <router-link v-if="!tmp.thridMenu" to="">
                 <div @click="toggleTwo(ind)">
                   <div class="col-xs-16 col-xs-offset-6">
                     <span>{{tmp.sedName}}</span>
@@ -37,7 +36,6 @@
                     <span :class="nowInd==ind?'arrow-bottom':'arrow-right'"></span>
                   </div>
                 </div>
-                </router-link>                
                 <!--三级菜单-->
                 <template v-if="tmp.thirdMenu">
                   <ul v-show="nowInd==ind" class="col-xs-24">
