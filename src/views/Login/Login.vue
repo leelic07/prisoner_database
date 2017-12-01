@@ -109,7 +109,7 @@
             console.log(err);
           })
         }
-      },
+      } ,
 
     },
     mounted() {

@@ -13,11 +13,11 @@
         <div class="content-up col-xs-24">
           <div class="left pull-left">
             <label for="userName">用户名</label>
-            <input id="userName" type="text" :value="userName" class="form-control" disabled>
+            <input id="userName" type="text" class="form-control" disabled v-model="username">
           </div>
           <div class="right pull-left">
             <label for="createdTime">创建时间</label>
-            <input id="createdTime" type="text" :value="createdTime" class="form-control" disabled>
+            <input id="createdTime" type="text" class="form-control" disabled v-model="createdTime">
           </div>
         </div>
         <div class="content-down col-xs-24">
@@ -32,10 +32,10 @@
         </div>
         <div class="col-xs-24 um-button">
           <div class="pull-left left">
-            <button class="btn btn-default pull-right">返回</button>
+            <button class="pull-right">返回</button>
           </div>
           <div class="pull-left right">
-            <button class="btn btn-primary" @click="saveUser()">保存</button>
+            <button class="pull-left" @click="saveUser()">保存</button>
           </div>
         </div>
       </div>
@@ -48,7 +48,10 @@
       </div>
 
       <!--提示框-->
-      <Remind v-show="remindShow" :status="remind.status" :msg="remind.msg"></Remind>
+      <Remind v-if="remindShow" :status="remind.status" :msg="remind.msg"></Remind>
+
+      <!--模态框-->
+      <Modal :method="modal.method" :msg="modal.msg"></Modal>
     </div>
   </Container>
 
@@ -58,53 +61,84 @@
   import Container from '@/components/Container/Container'
   import Bread from '@/components/Bread/Bread'
   import Remind from '@/components/Remind/Remind'
+  import Modal from '@/components/Modal/Modal'
   import {mapGetters} from 'vuex'
 
   export default {
     data() {
       return {
         breadCrumb: [],//面包屑
-        userName: 'zzz123456789',//用户名
-        createdTime: '1993-1-11 23:30:10',//创建时间
-        updatedTime: '2017-10-23 23:30:10',//最后创建时间
+        username: '',//用户名
+        createdTime: '',//创建时间
+        updatedTime: '',//最后创建时间
         name: '',//姓名
         remind: {//提示框信息
           status: '',
           msg: ''
+        },
+        modal: {//模态框提示信息
+          msg: '',
+          method: ''
         }
       }
     },
     computed: {
-      ...mapGetters({
-        remindShow: 'remindShow'
-      })
+      remindShow: {
+        get(){
+          return this.$store.getters.remindShow;
+        }
+      }
     },
     components: {
       Container,
       Bread,
-      Remind
+      Remind,
+      Modal
     },
     methods: {
       //点击保存时执行的方法
       saveUser(){
         if (this.isNull(this.name)) {
           this.remind = {
-            status:'warn',
-            msg:'姓名不能为空'
+            status: 'warn',
+            msg: '姓名不能为空'
           }
           this.$store.dispatch('showRemind');
         } else {
-//        this.axios.defaults.headers.common['Authorization'] = `Bearer ${window.sessionStorage.getItem('access_token')}`;
-          this.axios.get('/api/users/me', {
-            name: this.name
-          }).then(res => {
-            console.log(res);
-          }).catch(err => {
-            console.log(err);
-          })
-//        $.ajax("http://10.10.10.119:8080/cid/api/users",{headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiY2lkIl0sInVzZXJfbmFtZSI6ImFkbWluIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTUxMjAyNjI1MiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiOGI3MGQyMDctOTRkMS00NmY5LTk4N2YtMTg2Mjk2MDg4NzQyIiwiY2xpZW50X2lkIjoiY2lkIn0.xqg8xwpBodFyw1J82NYFmS9S44lbJA2yFFQfBQf_bhY'}}).then(function(val){console.log(val);})
+          this.modal = {
+            msg: '确定修改个人信息?',
+            method: this.confirmModify
+          }
+          $('.modal').modal();
         }
       },
+      //点击确定保存修改信息时执行的方法
+      confirmModify(){
+        this.axios.put('/api/users/me', {
+          name: this.name
+        }).then(res => {
+          let data = res.data;
+          this.createdTime = data.createdTime;
+          this.name = data.name;
+          this.username = data.username;
+        }).catch(err => {
+          console.log(err);
+        })
+      },
+      //获取用户个人信息方法
+      getUserMsg(){
+        this.axios.get('/api/users/me').then(res => {
+          let data = res.data;
+          this.createdTime = data.createdTime;
+          this.name = data.name;
+          this.username = data.username;
+        }).catch(err => {
+          console.log(err);
+        })
+      }
+    },
+    mounted(){
+      this.getUserMsg();
     }
   }
 </script>
@@ -112,6 +146,7 @@
 <style type="text/stylus" lang="stylus" scoped>
   white = #fff
   um-border = 1px solid #ddd
+
   button(color,background,border-radius,hover-color,height,width,font-size,border)//实现按钮的样式
     color:color
     background:background
@@ -151,7 +186,7 @@
         width:49%
       .right
         width:49%
-        margin-left:20px
+        margin-left:2%
       label
         margin-bottom:10px
       .content-up

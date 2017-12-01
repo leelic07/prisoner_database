@@ -30,11 +30,11 @@ axios.interceptors.request.use(function (config) {
   let access_token = window.sessionStorage.getItem('access_token');
   let refresh_token = window.localStorage.getItem('refresh_token');
   // console.log(config)
-  if (config.url == 'cid/oauth/token') {
+  if (config.url == 'oauth/token') {
 
   } else {
     if (access_token) {
-      config.headers.common['Authorization'] = `Bearer ${access_token}`
+      config.headers.common['Authorization'] = `Bearer ${access_token}`//每次发送请求是给请求头加上access_token
     }
   }
   console.log(config);
