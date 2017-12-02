@@ -28,7 +28,7 @@
           <!--提示框-->
           <Remind v-if="remindShow" :status="remind.status" :msg="remind.msg"></Remind>
           <!--模态框-->
-          <Modal :method="modal.method" :msg="modal.msg"></Modal>
+          <Modal v-if="modalShow" :method="modal.method" :msg="modal.msg"></Modal>
         </div>
     </Container>
 </template>
@@ -63,7 +63,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      remindShow:'remindShow'
+      remindShow:'remindShow',
+      modalShow:'modalShow'
     })
   },
   methods:{
@@ -101,7 +102,7 @@ export default {
             msg: '确定修改密码?',
             method: this.confirmModify
             }
-            $('#modal').modal();
+            this.$store.dispatch('showModal');
         }
     },
     //点击确定保存修改信息时执行的方法

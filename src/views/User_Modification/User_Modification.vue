@@ -51,7 +51,7 @@
       <Remind v-if="remindShow" :status="remind.status" :msg="remind.msg"></Remind>
 
       <!--模态框-->
-      <Modal :method="modal.method" :msg="modal.msg"></Modal>
+      <Modal v-if="modalShow" :method="modal.method" :msg="modal.msg"></Modal>
     </div>
   </Container>
 
@@ -85,7 +85,8 @@
     },
     computed: {
       ...mapGetters({
-        remindShow:'remindShow'
+        remindShow:'remindShow',
+        modalShow:'modalShow'
       })
     },
     components: {
@@ -108,7 +109,7 @@
             msg: '确定修改个人信息?',
             method: this.confirmModify
           }
-          $('.modal').modal();
+          this.$store.dispatch('showModal')
         }
       },
       //点击确定保存修改信息时执行的方法

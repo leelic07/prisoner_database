@@ -27,7 +27,24 @@
         return {
 
         }
+      },
+      methods:{
+        //模态框组件加载时执行的方法
+        modalInit(){
+          $('.modal').modal();
+        },
+        //模态框组件消失时执行的方法
+        modalDestroy(){
+          $('.modal').on('hidden.bs.modal', () => {
+              this.$store.dispatch('hideModal');
+          })
+        }
+      },
+      mounted(){
+          this.modalInit();
+          this. modalDestroy();
       }
+
     }
 </script>
 
