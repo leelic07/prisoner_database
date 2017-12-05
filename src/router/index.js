@@ -9,6 +9,7 @@ import Password_Modification from '@/views/Password_Modification/Password_modifi
 Vue.use(Router)
 
 export default new Router({
+  mode:'history',
   routes: [
     // {
     //   path: '/',

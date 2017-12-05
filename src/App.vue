@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container-fluid">
-    <NavHeader v-if="isLoginPage"></NavHeader>
+    <NavHeader></NavHeader>
     <SideBar v-if="isLoginPage"></SideBar>
     <!--<div id="router-view">-->
       <router-view/>
