@@ -20,7 +20,7 @@ Object.keys(Validate).forEach((key) => {
 Vue.prototype.axios = axios;
 
 //设置axois的默认请求地址
-axios.defaults.baseURL = 'http://10.10.10.128:8080/cid-test';
+axios.defaults.baseURL = 'http://10.10.10.140:8080/cid-test';
 
 //axios设置跨域请求
 axios.defaults.withCredentials = true;
@@ -31,7 +31,8 @@ axios.interceptors.request.use(function (config) {
   let refresh_token = window.localStorage.getItem('refresh_token');
   // console.log(config.url)
   if (config.url == '/oauth/token') {
-
+    //console.log(config.url=='/oauth/token');
+    //config.headers.common['Authorization'] = 'Basic Y2lkOjI1ZDVlMmU5YjBlZDQ3YmJiOWQ0YjgyZjRhYmM4YzA5'   
   } else {
     if (access_token) {
       config.headers.common['Authorization'] = `Bearer ${access_token}`//每次发送请求是给请求头加上access_token

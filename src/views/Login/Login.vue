@@ -94,19 +94,19 @@
           params.append('grant_type','password');
           params.append('username',this.userName);
           params.append('password',this.password);
-        this.axios({
-          method:'post',
-          url:'/oauth/token',
-          data: params,
-          headers:{
-            'Content-Type':'application/x-www-form-urlencoded'
-          },
-          config:{
+
+          this.axios({
+            method:'post',
+            url:'/oauth/token',
+            data: params,
+            headers:{
+              'Content-Type':'application/x-www-form-urlencoded'
+            },
             auth:{
               username:'cid',
               password:'25d5e2e9b0ed47bbb9d4b82f4abc8c09'
             }
-          }}).then(res => {
+          }).then(res => {
             this.access_token = res.data.access_token;
             this.refresh_token = res.data.refresh_token;
             window.sessionStorage.setItem('access_token',this.access_token)
@@ -116,11 +116,6 @@
             })
           }).catch(err => {
             console.log(err);
-//            this.remind = {
-//              msg:'用户名或密码错误',
-//              status:'failed'
-//            }
-//            this.$store.dispatch('showRemind');
             this.error = '用户名或密码错误'
           })
         }
